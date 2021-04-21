@@ -12,9 +12,9 @@
             "console": "integratedTerminal",
             "cwd": "${workspaceFolder}",
             "args": [
-                "1d091ec1-c942-4b8c-99c0-96f7ae0f5f15",
+                "c5fb91a9-7c27-4cd7-8d48-1c0d76932e3d",
                 "--resource-group-name",
-                "learn-05d6fc14-17c4-4b9c-b833-81dc1142764c",
+                "learn-be1e36da-d086-4506-9b36-abc8a194e09f",
                 "--iot-hub-name",
                 "iot-hub-materialfluss",
             ],

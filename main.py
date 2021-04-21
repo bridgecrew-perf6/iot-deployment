@@ -11,7 +11,6 @@ from azure.mgmt.iothub.models import (
     IotHubSkuInfo,
     OperationInputs,
 )
-from azure.mgmt.storage import StorageManagementClient
 from azure.mgmt.resource import ResourceManagementClient
 
 
