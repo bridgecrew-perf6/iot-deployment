@@ -1,0 +1,24 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "main.py",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}",
+            "args": [
+                "1d091ec1-c942-4b8c-99c0-96f7ae0f5f15",
+                "--resource-group-name",
+                "learn-05d6fc14-17c4-4b9c-b833-81dc1142764c",
+                "--iot-hub-name",
+                "iot-hub-materialfluss",
+            ],
+            "justMyCode": false
+        }
+    ]
+}
