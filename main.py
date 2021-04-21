@@ -5,14 +5,13 @@ import random
 # is installed automatically with the other libraries.
 from azure.identity import AzureCliCredential
 
-from provisioning import resource_group, iot_hub
-
+from services import iot_devices, iot_hub, resource_group
 
 # Constants we need in multiple places: the resource group name and the region
 # in which we provision resources. You can change these values however you want.
 DEFAULT_RESOURCE_GROUP_NAME = "IoT-project"
-DEFAULT_LOCATION = "northeurope"
 DEFAULT_IOT_HUB_NAME = f"iot-hub-materialfluss{random.randint(1,100000):05}"
+DEFAULT_LOCATION = "northeurope"
 
 
 def main(args: argparse.Namespace):
@@ -34,6 +33,13 @@ def main(args: argparse.Namespace):
     )
 
     # Step 3: Onboard & provision default IoT devices.
+    iot_devices.provision(
+        credential,
+        args.azure_subscription_id,
+        args.resource_group_name,
+        args.iot_hub_name,
+        args.device_ids_file_path,
+    )
 
 
 if __name__ == "__main__":
@@ -48,15 +54,21 @@ if __name__ == "__main__":
         help="Resource group name for the deployment.",
     )
     parser.add_argument(
-        "--location",
-        type=str,
-        default=DEFAULT_LOCATION,
-        help="Location of the Azure datacenter to deploy.",
-    )
-    parser.add_argument(
         "--iot-hub-name",
         type=str,
         default=DEFAULT_IOT_HUB_NAME,
         help="IotHub name for deployment.",
+    )
+    parser.add_argument(
+        "--device-ids-file-path",
+        type=str,
+        help="Path of the text file containing 1 "
+        "device id per line to be registered in IotHub.",
+    )
+    parser.add_argument(
+        "--location",
+        type=str,
+        default=DEFAULT_LOCATION,
+        help="Location of the Azure datacenter to deploy.",
     )
     main(parser.parse_args())

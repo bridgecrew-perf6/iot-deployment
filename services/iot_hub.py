@@ -8,6 +8,8 @@ from azure.mgmt.iothub.models import (
 )
 
 IOT_HUB_MGMT_API_VER = "2020-03-01"
+SHARED_ACCESS_KEY_NAME = "iothubowner"
+IOT_HUB_CONN_STR_TEMPLATE = "HostName={};SharedAccessKeyName={};SharedAccessKey={}"
 
 
 def provision(
@@ -54,4 +56,26 @@ def provision(
             print(f"Provisioned IotHub {iot_res.name}")
     else:
         if verbose:
-            print(f"IotHub{iot_hub_name} is already provisioned")
+            print(f"IotHub {iot_hub_name} is already provisioned")
+
+
+def get_connection_str(
+    credential: AzureCliCredential,
+    azure_subscription_id: str,
+    resource_group_name: str,
+    iot_hub_name: str,
+) -> str:
+    iot_hub_client = IotHubClient(
+        credential, azure_subscription_id, api_version=IOT_HUB_MGMT_API_VER
+    )
+    sas_auth_rule = iot_hub_client.iot_hub_resource.get_keys_for_key_name(
+        resource_group_name, iot_hub_name, SHARED_ACCESS_KEY_NAME
+    )
+    iot_hub_desc = iot_hub_client.iot_hub_resource.get(
+        resource_group_name, iot_hub_name
+    )
+    return IOT_HUB_CONN_STR_TEMPLATE.format(
+        iot_hub_desc.properties.host_name,
+        SHARED_ACCESS_KEY_NAME,
+        sas_auth_rule.secondary_key,
+    )

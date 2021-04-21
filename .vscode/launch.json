@@ -12,11 +12,13 @@
             "console": "integratedTerminal",
             "cwd": "${workspaceFolder}",
             "args": [
-                "c5fb91a9-7c27-4cd7-8d48-1c0d76932e3d",
+                "ad4669af-c48e-4a1c-b9c4-8616201a3720",
                 "--resource-group-name",
-                "learn-be1e36da-d086-4506-9b36-abc8a194e09f",
+                "learn-601998e2-715d-4062-b4c1-0683d1914d2f",
                 "--iot-hub-name",
                 "iot-hub-materialfluss",
+                "--device-ids-file-path",
+                "./configs/iot-device-ids.txt",
             ],
             "justMyCode": false
         }

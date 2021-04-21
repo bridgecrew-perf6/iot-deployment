@@ -2,7 +2,7 @@
 The following steps of Azure service deployment are executed by the deployment script:
 
 1. Create a resource group for Azure resources of the IoT project,
-2. Deploy Azure IoTHub,
+2. Deploy Azure IotHub,
 3. Onboard & provision default IoT devices,
 4. **TODO: Add more steps!**
 
@@ -23,7 +23,9 @@ The following steps of Azure service deployment are executed by the deployment s
 ## **Usage:**
 
     usage: main.py [-h] [--resource-group-name RESOURCE_GROUP_NAME]
-                [--location LOCATION] [--iot-hub-name IOT_HUB_NAME]
+                [--iot-hub-name IOT_HUB_NAME]
+                [--device-ids-file-path DEVICE_IDS_FILE_PATH]
+                [--location LOCATION]
                 azure_subscription_id
 
     positional arguments:
@@ -34,6 +36,9 @@ The following steps of Azure service deployment are executed by the deployment s
     -h, --help            show this help message and exit
     --resource-group-name RESOURCE_GROUP_NAME
                             Resource group name for the deployment.
-    --location LOCATION   Location of the Azure datacenter to deploy.
     --iot-hub-name IOT_HUB_NAME
                             IotHub name for deployment.
+    --device-ids-file-path DEVICE_IDS_FILE_PATH
+                            Path of the text file containing 1 device id per line
+                            to be registered in IotHub.
+    --location LOCATION   Location of the Azure datacenter to deploy.
