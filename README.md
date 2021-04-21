@@ -4,7 +4,8 @@ The following steps of Azure service deployment are executed by the deployment s
 1. Create a resource group for Azure resources of the IoT project,
 2. Deploy Azure IotHub,
 3. Onboard & provision default IoT devices,
-4. **TODO: Add more steps!**
+4. Provision the CosmosDB,
+5. **TODO: Add more steps!**
 
 * **Requires executing the following commands in any terminal**:
   1. `az login` to login,
@@ -25,7 +26,7 @@ The following steps of Azure service deployment are executed by the deployment s
     usage: main.py [-h] [--resource-group-name RESOURCE_GROUP_NAME]
                 [--iot-hub-name IOT_HUB_NAME]
                 [--device-ids-file-path DEVICE_IDS_FILE_PATH]
-                [--location LOCATION]
+                [--cosmosdb-name COSMOSDB_NAME] [--location LOCATION]
                 azure_subscription_id
 
     positional arguments:
@@ -41,4 +42,6 @@ The following steps of Azure service deployment are executed by the deployment s
     --device-ids-file-path DEVICE_IDS_FILE_PATH
                             Path of the text file containing 1 device id per line
                             to be registered in IotHub.
+    --cosmosdb-name COSMOSDB_NAME
+                            CosmosDB name for the deployment.
     --location LOCATION   Location of the Azure datacenter to deploy.

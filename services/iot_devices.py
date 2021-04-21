@@ -71,11 +71,14 @@ def provision(
             if verbose:
                 print(f"Device {device_id} is already registered")
 
+    if not device_ids_file_path or not device_keys.id_to_keys:
+        return
     dir_name, file_name = os.path.split(device_ids_file_path)
     id_to_keys_path = os.path.join(dir_name, f"{file_name}.keys")
     if os.path.isfile(id_to_keys_path):
         with open(id_to_keys_path, "r") as f:
             other_id_to_keys: Dict[str, Tuple[str, str]] = json.load(f)
-            device_keys.id_to_keys.update(other_id_to_keys)
+            other_id_to_keys.update(device_keys.id_to_keys)
+            device_keys.id_to_keys = other_id_to_keys
     with open(id_to_keys_path, "w") as f:
         json.dump(device_keys.id_to_keys, f, indent=2)

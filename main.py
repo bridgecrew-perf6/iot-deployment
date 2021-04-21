@@ -5,13 +5,14 @@ import random
 # is installed automatically with the other libraries.
 from azure.identity import AzureCliCredential
 
-from services import iot_devices, iot_hub, resource_group
+from services import cosmosdb, iot_devices, iot_hub, resource_group
 
 # Constants we need in multiple places: the resource group name and the region
 # in which we provision resources. You can change these values however you want.
 DEFAULT_RESOURCE_GROUP_NAME = "IoT-project"
 DEFAULT_IOT_HUB_NAME = f"iot-hub-materialfluss{random.randint(1,100000):05}"
-DEFAULT_LOCATION = "northeurope"
+DEFAULT_COSMOSDB_NAME = f"cosmosdb-materialfluss{random.randint(1,100000):05}"
+DEFAULT_LOCATION = "North Europe"
 
 
 def main(args: argparse.Namespace):
@@ -41,6 +42,15 @@ def main(args: argparse.Namespace):
         args.device_ids_file_path,
     )
 
+    # Step 4: Provision the CosmosDB.
+    cosmosdb.provision(
+        credential,
+        args.azure_subscription_id,
+        args.resource_group_name,
+        args.cosmosdb_name,
+        args.location,
+    )
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -62,8 +72,15 @@ if __name__ == "__main__":
     parser.add_argument(
         "--device-ids-file-path",
         type=str,
+        default="",
         help="Path of the text file containing 1 "
         "device id per line to be registered in IotHub.",
+    )
+    parser.add_argument(
+        "--cosmosdb-name",
+        type=str,
+        default=DEFAULT_COSMOSDB_NAME,
+        help="CosmosDB name for the deployment.",
     )
     parser.add_argument(
         "--location",

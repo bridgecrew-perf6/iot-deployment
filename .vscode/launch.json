@@ -12,13 +12,15 @@
             "console": "integratedTerminal",
             "cwd": "${workspaceFolder}",
             "args": [
-                "ad4669af-c48e-4a1c-b9c4-8616201a3720",
+                "1bd4cb47-d364-4930-9d85-0ec7c480b63e",
                 "--resource-group-name",
-                "learn-601998e2-715d-4062-b4c1-0683d1914d2f",
+                "learn-ba4c2b6e-48de-4aff-9f94-d7364d8fcda8",
                 "--iot-hub-name",
                 "iot-hub-materialfluss",
                 "--device-ids-file-path",
                 "./configs/iot-device-ids.txt",
+                "--cosmosdb-name",
+                "cosmosdb-materialfluss",
             ],
             "justMyCode": false
         }
