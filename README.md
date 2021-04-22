@@ -1,11 +1,14 @@
 # Deployment using Azure Python SDK
 The following steps of Azure service deployment are executed by the deployment script:
 
-1. Create a resource group for Azure resources of the IoT project,
-2. Deploy Azure IotHub,
-3. Onboard & provision default IoT devices,
-4. Provision the CosmosDB and initialize it,
-5. **TODO: Add more steps!**
+1. Create a **resource group** for Azure resources of the IoT project,
+2. Deploy Azure **IotHub**,
+3. Onboard & provision default **IoT devices**,
+4. Provision a **CosmosDB** and initialize it,
+5. Provision an **App Service Plan** for Azure Functions,
+6. Provision a **Storage account** for Azure Functions,
+7. Provision **Azure Functions** inside the ASP (app service plan),
+8. **TODO: Add more steps!**
 
 * **Requires executing the following commands in any terminal**:
   1. `az login` to login,
@@ -26,7 +29,10 @@ The following steps of Azure service deployment are executed by the deployment s
     usage: main.py [-h] [--resource-group-name RESOURCE_GROUP_NAME]
                 [--iot-hub-name IOT_HUB_NAME]
                 [--device-ids-file-path DEVICE_IDS_FILE_PATH]
-                [--cosmosdb-name COSMOSDB_NAME] [--location LOCATION]
+                [--cosmosdb-name COSMOSDB_NAME]
+                [--app-srv-plan-name APP_SRV_PLAN_NAME]
+                [--storage-acc-name STORAGE_ACC_NAME]
+                [--functions-name FUNCTIONS_NAME] [--location LOCATION]
                 azure_subscription_id
 
     positional arguments:
@@ -44,4 +50,10 @@ The following steps of Azure service deployment are executed by the deployment s
                             to be registered in IotHub.
     --cosmosdb-name COSMOSDB_NAME
                             CosmosDB name for the deployment.
+    --app-srv-plan-name APP_SRV_PLAN_NAME
+                            App Service Plan name for the deployment.
+    --storage-acc-name STORAGE_ACC_NAME
+                            Storage account name for the deployment.
+    --functions-name FUNCTIONS_NAME
+                            Azure Functions name for the deployment.
     --location LOCATION   Location of the Azure datacenter to deploy.
