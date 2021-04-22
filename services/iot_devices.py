@@ -59,17 +59,18 @@ def provision(
         primary_key, secondary_key = device_keys.generate_keys(device_id)
         try:
             # Import the device identity to the IotHub
+            # https://docs.microsoft.com/en-us/python/api/azure-iot-hub/azure.iot.hub.iothubregistrymanager?view=azure-python#create-device-with-sas-device-id--primary-key--secondary-key--status--iot-edge-false-
             iot_hub_reg_mgr.create_device_with_sas(
                 device_id, primary_key, secondary_key, "enabled"
             )
             if verbose:
-                print(f"Device {device_id} is registered to IotHub")
+                print(f"Device '{device_id}' is registered to IotHub")
         except HttpOperationError as e:
             if not hasattr(e.response, "status_code") or e.response.status_code != 409:
                 raise e
             device_keys.remove_device(device_id)
             if verbose:
-                print(f"Device {device_id} is already registered")
+                print(f"Device '{device_id}' is already registered")
 
     if not device_ids_file_path or not device_keys.id_to_keys:
         return

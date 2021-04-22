@@ -42,14 +42,14 @@ def main(args: argparse.Namespace):
         args.device_ids_file_path,
     )
 
-    # Step 4: Provision the CosmosDB.
-    cosmosdb.provision(
+    # Step 4: Provision the CosmosDB and initialize it.
+    cosmosdb.Provisioner(
         credential,
         args.azure_subscription_id,
         args.resource_group_name,
         args.cosmosdb_name,
         args.location,
-    )
+    ).provision()
 
 
 if __name__ == "__main__":

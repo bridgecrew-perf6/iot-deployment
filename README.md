@@ -4,7 +4,7 @@ The following steps of Azure service deployment are executed by the deployment s
 1. Create a resource group for Azure resources of the IoT project,
 2. Deploy Azure IotHub,
 3. Onboard & provision default IoT devices,
-4. Provision the CosmosDB,
+4. Provision the CosmosDB and initialize it,
 5. **TODO: Add more steps!**
 
 * **Requires executing the following commands in any terminal**:
