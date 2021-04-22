@@ -1,0 +1,12 @@
+azure-core
+azure-cosmos
+azure-identity
+azure-iot-hub
+azure-mgmt-cosmosdb
+azure-mgmt-iothub
+azure-mgmt-resource
+azure-mgmt-storage
+azure-mgmt-storage
+azure-mgmt-web
+msrest
+msrestazure
