@@ -57,7 +57,7 @@ class Provisioner:
         self._configure_iot_hub_event_func_app()
         # Provision the Azure function app triggered periodically to pull device
         # telemetry data and write it to the messages container.
-        self.__configure_data_puller_func_app()
+        self._configure_data_puller_func_app()
         # Deploy all function apps
         self._repo_deploy()
         # Cleanup afterwards
@@ -125,7 +125,7 @@ class Provisioner:
             },
         )
 
-    def __configure_data_puller_func_app(self):
+    def _configure_data_puller_func_app(self):
         with open(self.vendor_credentials_path, "r") as f:
             all_creds = json.load(f)
         self._configure_func_app(
