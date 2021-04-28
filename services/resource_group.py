@@ -1,3 +1,5 @@
+import logging
+
 from azure.identity import AzureCliCredential
 from azure.mgmt.resource import ResourceManagementClient
 from azure.mgmt.resource.resources.models import ResourceGroup
@@ -10,7 +12,7 @@ def provision(
     azure_subscription_id: str,
     resource_group_name: str,
     location: str,
-    verbose: bool = True,
+    logger: logging.Logger,
 ):
     resource_client = ResourceManagementClient(
         credential, azure_subscription_id, api_version=RESOURCE_MGMT_API_VER
@@ -20,8 +22,6 @@ def provision(
         rg_result = resource_client.resource_groups.create_or_update(
             resource_group_name, ResourceGroup(location=location)
         )
-        if verbose:
-            print(f"Provisioned resource group '{rg_result.name}'")
+        logger.info(f"Provisioned resource group '{rg_result.name}'")
     else:
-        if verbose:
-            print(f"Resource group '{resource_group_name}' is already provisioned")
+        logger.info(f"Resource group '{resource_group_name}' is already provisioned")

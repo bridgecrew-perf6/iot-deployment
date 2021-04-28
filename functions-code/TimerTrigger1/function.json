@@ -1,0 +1,18 @@
+{
+  "bindings": [
+    {
+      "name": "myTimer",
+      "type": "timerTrigger",
+      "direction": "in",
+      "schedule": "*/30 * * * * *"
+    },
+    {
+      "name": "outputDocument",
+      "direction": "out",
+      "type": "cosmosDB",
+      "databaseName": "iot",
+      "collectionName": "messages",
+      "connectionStringSetting": "cosmosdb-materialfluss_DOCUMENTDB"
+    }
+  ]
+}

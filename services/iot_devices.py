@@ -1,5 +1,6 @@
 import base64
 import json
+import logging
 import os
 import secrets
 from typing import Dict, Tuple
@@ -46,7 +47,7 @@ def provision(
     resource_group_name: str,
     iot_hub_name: str,
     device_ids_file_path: str,
-    verbose: bool = True,
+    logger: logging.Logger,
 ):
     device_ids = load_file.load_device_ids(device_ids_file_path)
     conn_str = iot_hub.get_connection_str(
@@ -63,14 +64,12 @@ def provision(
             iot_hub_reg_mgr.create_device_with_sas(
                 device_id, primary_key, secondary_key, "enabled"
             )
-            if verbose:
-                print(f"Device '{device_id}' is registered to IotHub")
+            logger.info(f"Device '{device_id}' is registered to IotHub")
         except HttpOperationError as e:
             if not hasattr(e.response, "status_code") or e.response.status_code != 409:
                 raise e
             device_keys.remove_device(device_id)
-            if verbose:
-                print(f"Device '{device_id}' is already registered")
+            logger.info(f"Device '{device_id}' is already registered")
 
     if not device_ids_file_path or not device_keys.id_to_keys:
         return

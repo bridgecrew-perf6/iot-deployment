@@ -1,0 +1,21 @@
+{
+  "bindings": [
+    {
+      "type": "eventHubTrigger",
+      "name": "IoTHubMessages",
+      "direction": "in",
+      "eventHubName": "iot-hub-materialfluss",
+      "connection": "iot-hub-materialfluss_events_IOTHUB",
+      "cardinality": "many",
+      "consumerGroup": "$Default"
+    },
+    {
+      "name": "outputDocument",
+      "direction": "out",
+      "type": "cosmosDB",
+      "databaseName": "iot",
+      "collectionName": "messages",
+      "connectionStringSetting": "cosmosdb-materialfluss_DOCUMENTDB"
+    }
+  ]
+}

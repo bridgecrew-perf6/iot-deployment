@@ -8,7 +8,7 @@ The following steps of Azure service deployment are executed by the deployment s
 5. Provision an **App Service Plan** for Azure Functions,
 6. Provision a **Storage account** for Azure Functions,
 7. Provision **Azure Functions** inside the ASP (app service plan),
-8. **TODO: Add more steps!**
+8. Initialize the Azure **function apps**.
 
 * **Requires executing the following commands in any terminal**:
   1. `az login` to login,
@@ -32,12 +32,22 @@ The following steps of Azure service deployment are executed by the deployment s
                 [--cosmosdb-name COSMOSDB_NAME]
                 [--app-srv-plan-name APP_SRV_PLAN_NAME]
                 [--storage-acc-name STORAGE_ACC_NAME]
-                [--functions-name FUNCTIONS_NAME] [--location LOCATION]
-                azure_subscription_id
+                [--functions-name FUNCTIONS_NAME]
+                [--functions-code-path FUNCTIONS_CODE_PATH]
+                [--location LOCATION]
+                [--logging-level {DEBUG,INFO,WARNING,ERROR,CRITICAL}]
+                [--verbose]
+                azure_subscription_id vendor_credentials_path
 
     positional arguments:
     azure_subscription_id
                             Azure subscription ID.
+    vendor_credentials_path
+                            Path to a JSON file containing credentials for each
+                            device vendor server.The JSON object must be of the
+                            following format: {"vendor1": {"endpoint_uri1":
+                            {"x-api-key": API_KEY}, "endpoint_uri2": {"username":
+                            USERNAME, "password": PASSWORD}}, ...}
 
     optional arguments:
     -h, --help            show this help message and exit
@@ -56,4 +66,10 @@ The following steps of Azure service deployment are executed by the deployment s
                             Storage account name for the deployment.
     --functions-name FUNCTIONS_NAME
                             Azure Functions name for the deployment.
+    --functions-code-path FUNCTIONS_CODE_PATH
+                            Path to the folder containing Azure Functions source
+                            code.Be warned that '.git' folder will be erased!
     --location LOCATION   Location of the Azure datacenter to deploy.
+    --logging-level {DEBUG,INFO,WARNING,ERROR,CRITICAL}
+                            Logging level of the program.
+    --verbose, -v         The flag for whether there should be logging messages.

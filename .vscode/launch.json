@@ -12,9 +12,10 @@
             "console": "integratedTerminal",
             "cwd": "${workspaceFolder}",
             "args": [
-                "c021aa37-2ec6-4104-8a01-c0491f4d7fff",
+                "ad4669af-c48e-4a1c-b9c4-8616201a3720",
+                "./configs/vendor_credentials.json",
                 "--resource-group-name",
-                "learn-71a840d4-3073-4be7-884a-0ec20f972159",
+                "learn-9c2cc62f-9d62-49d4-87e6-0c644a857e20",
                 "--iot-hub-name",
                 "iot-hub-materialfluss",
                 "--device-ids-file-path",
@@ -26,7 +27,10 @@
                 "--storage-acc-name",
                 "storage0materialfluss",
                 "--functions-name",
-                "functions-materialfluss2",
+                "functions-materialfluss",
+                "--location",
+                "West Europe",
+                "--verbose",
             ],
             "justMyCode": false
         }

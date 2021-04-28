@@ -1,3 +1,5 @@
+import logging
+
 from azure.identity import AzureCliCredential
 from azure.mgmt.web import WebSiteManagementClient
 from azure.mgmt.web.models import AppServicePlan, SkuDescription
@@ -11,7 +13,7 @@ def provision(
     resource_group_name: str,
     app_srv_plan_name: str,
     location: str,
-    verbose: bool = True,
+    logger: logging.Logger,
 ):
     website_client = WebSiteManagementClient(
         credential, azure_subscription_id, api_version=WEBSITE_MGMT_API_VER
@@ -36,8 +38,6 @@ def provision(
             resource_group_name, app_srv_plan_name, app_srv_plan
         )
         asp_res = poller.result()
-        if verbose:
-            print(f"Provisioned App Service Plan '{asp_res.name}'")
+        logger.info(f"Provisioned App Service Plan '{asp_res.name}'")
     else:
-        if verbose:
-            print(f"App Service Plan '{app_srv_plan_name}' is already provisioned")
+        logger.info(f"App Service Plan '{app_srv_plan_name}' is already provisioned")

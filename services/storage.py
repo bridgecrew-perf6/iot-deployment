@@ -1,3 +1,6 @@
+import logging
+import sys
+
 from azure.identity import AzureCliCredential
 from azure.mgmt.storage import StorageManagementClient
 from azure.mgmt.storage.models import (
@@ -15,7 +18,7 @@ def provision(
     resource_group_name: str,
     storage_acc_name: str,
     location: str,
-    verbose: bool = True,
+    logger: logging.Logger,
 ):
     storage_client = StorageManagementClient(
         credential, azure_subscription_id, api_version=STORAGE_MGMT_API_VER
@@ -30,9 +33,8 @@ def provision(
             StorageAccountCheckNameAvailabilityParameters(name=storage_acc_name)
         )
         if not avail_res.name_available:
-            if verbose:
-                print(f"Storage account '{storage_acc_name}' is not available")
-            exit(1)
+            logger.error(f"Storage account '{storage_acc_name}' is not available")
+            sys.exit(1)
         params = StorageAccountCreateParameters(
             sku=Sku(name="Standard_LRS"),
             kind="StorageV2",
@@ -46,8 +48,6 @@ def provision(
             resource_group_name, storage_acc_name, params
         )
         storage_res = poller.result()
-        if verbose:
-            print(f"Provisioned Storage account '{storage_res.name}'")
+        logger.info(f"Provisioned Storage account '{storage_res.name}'")
     else:
-        if verbose:
-            print(f"Storage account '{storage_acc_name}' is already provisioned")
+        logger.info(f"Storage account '{storage_acc_name}' is already provisioned")

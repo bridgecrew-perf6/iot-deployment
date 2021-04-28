@@ -1,0 +1,22 @@
+{
+  "bindings": [
+    {
+      "type": "cosmosDBTrigger",
+      "name": "documents",
+      "direction": "in",
+      "leaseCollectionName": "messages_leases",
+      "connectionStringSetting": "cosmosdb-materialfluss_DOCUMENTDB",
+      "databaseName": "iot",
+      "collectionName": "messages",
+      "createLeaseCollectionIfNotExists": true
+    },
+    {
+      "name": "outputDocument",
+      "direction": "out",
+      "type": "cosmosDB",
+      "databaseName": "iot",
+      "collectionName": "latest_messages",
+      "connectionStringSetting": "cosmosdb-materialfluss_DOCUMENTDB"
+    }
+  ]
+}
