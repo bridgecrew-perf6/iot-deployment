@@ -28,7 +28,7 @@ The following steps of Azure service deployment are executed by the deployment s
 
     usage: main.py [-h] [--resource-group-name RESOURCE_GROUP_NAME]
                 [--iot-hub-name IOT_HUB_NAME]
-                [--device-ids-file-path DEVICE_IDS_FILE_PATH]
+                [--device-ids-file-path DEVICE_IDS_FILE_PATH]   
                 [--cosmosdb-name COSMOSDB_NAME]
                 [--app-srv-plan-name APP_SRV_PLAN_NAME]
                 [--storage-acc-name STORAGE_ACC_NAME]
@@ -44,7 +44,7 @@ The following steps of Azure service deployment are executed by the deployment s
                             Azure subscription ID.
     vendor_credentials_path
                             Path to a JSON file containing credentials for each
-                            device vendor server.The JSON object must be of the
+                            device vendor server. The JSON object must be of the
                             following format: {"vendor1": {"endpoint_uri1":
                             {"x-api-key": API_KEY}, "endpoint_uri2": {"username":
                             USERNAME, "password": PASSWORD}}, ...}
@@ -68,7 +68,7 @@ The following steps of Azure service deployment are executed by the deployment s
                             Azure Functions name for the deployment.
     --functions-code-path FUNCTIONS_CODE_PATH
                             Path to the folder containing Azure Functions source
-                            code.Be warned that '.git' folder will be erased!
+                            code. Be warned that '.git' folder will be erased!
     --location LOCATION   Location of the Azure datacenter to deploy.
     --logging-level {DEBUG,INFO,WARNING,ERROR,CRITICAL}
                             Logging level of the program.

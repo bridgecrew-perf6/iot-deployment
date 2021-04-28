@@ -132,8 +132,8 @@ if __name__ == "__main__":
         "vendor_credentials_path",
         type=str,
         help="Path to a JSON file containing credentials for each device vendor server."
-        "The JSON object must be of the following format:\n"
-        ' {"vendor1": {"endpoint_uri1": {"x-api-key": API_KEY}, '
+        " The JSON object must be of the following format:\n"
+        '{"vendor1": {"endpoint_uri1": {"x-api-key": API_KEY}, '
         '"endpoint_uri2": {"username": USERNAME, "password": PASSWORD}}, ...}',
     )
     parser.add_argument(
@@ -184,7 +184,7 @@ if __name__ == "__main__":
         type=str,
         default=DEFAULT_FUNCTIONS_CODE_PATH,
         help="Path to the folder containing Azure Functions source code."
-        "Be warned that '.git' folder will be erased!",
+        " Be warned that '.git' folder will be erased!",
     )
     parser.add_argument(
         "--location",
