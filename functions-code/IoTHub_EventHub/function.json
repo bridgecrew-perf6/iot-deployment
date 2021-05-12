@@ -10,11 +10,19 @@
       "consumerGroup": "$Default"
     },
     {
-      "name": "outputDocument",
+      "name": "outputDocument_vemcon",
       "direction": "out",
       "type": "cosmosDB",
       "databaseName": "iot",
-      "collectionName": "messages",
+      "collectionName": "vemcon",
+      "connectionStringSetting": "cosmosdb-materialfluss_DOCUMENTDB"
+    },
+    {
+      "name": "outputDocument_mts_smart",
+      "direction": "out",
+      "type": "cosmosDB",
+      "databaseName": "iot",
+      "collectionName": "mts_smart",
       "connectionStringSetting": "cosmosdb-materialfluss_DOCUMENTDB"
     }
   ]

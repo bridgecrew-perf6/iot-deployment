@@ -1,15 +1,16 @@
 const fs = require('fs');
 const path = require('path');
 const https = require('https');
+const endpoint_1 = 'api.vemcon.net';
 const options = {
-    hostname: 'api.vemcon.net',
+    hostname: endpoint_1,
     port: 443,
     path: '/tt/v0/tooltrackers',
     method: 'GET',
     headers: {
         'x-api-key': JSON.parse(
             fs.readFileSync(path.join(__dirname, 'creds.json'))
-        )['x-api-key']
+        )[endpoint_1]['x-api-key']
     }
 };
 module.exports = function (context, myTimer) {
