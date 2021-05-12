@@ -15,12 +15,7 @@ from msrest.authentication import BasicTokenAuthentication
 
 
 class AzureIdentityCredentialAdapter(BasicTokenAuthentication):
-    def __init__(
-        self,
-        credential=None,
-        resource_id="https://management.azure.com/.default",
-        **kwargs
-    ):
+    def __init__(self, credential=None, resource_id="https://management.azure.com/.default", **kwargs):
         """Adapt any azure-identity credential to work with SDK that needs azure.common.credentials or msrestazure.
         Default resource is ARM (syntax of endpoint v2)
         :param credential: Any azure-identity credential (DefaultAzureCredential by default)

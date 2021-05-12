@@ -1,6 +1,5 @@
 {
-  "bindings": [
-    {
+  "bindings": [{
       "type": "cosmosDBTrigger",
       "name": "documents",
       "direction": "in",

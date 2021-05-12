@@ -13,16 +13,11 @@ from azure.mgmt.web.models import IpSecurityRestriction, Site, SiteConfig
 
 from services import app_srv_plan, iot_hub, storage
 
-STORAGE_CONN_STR_TEMPLATE = (
-    "DefaultEndpointsProtocol=https;"
-    "AccountName={};AccountKey={};EndpointSuffix=core.windows.net"
-)
+STORAGE_CONN_STR_TEMPLATE = "DefaultEndpointsProtocol=https;" "AccountName={};AccountKey={};EndpointSuffix=core.windows.net"
 COSMOSDB_CONN_STR_POSTFIX = "_DOCUMENTDB"
 IOT_HUB_CONN_STR_POSTFIX = "_events_IOTHUB"
 COSMOSDB_CONN_STR_TEMPLATE = "AccountEndpoint={};AccountKey={};"
-IOT_HUB_CONN_STR_TEMPLATE = (
-    "Endpoint={};SharedAccessKeyName={};SharedAccessKey={};EntityPath={}"
-)
+IOT_HUB_CONN_STR_TEMPLATE = "Endpoint={};SharedAccessKeyName={};SharedAccessKey={};EntityPath={}"
 FUNCTIONS_WORKER_RUNTIME = "node"
 WEBSITE_NODE_DEFAULT_VERSION = "~14"
 
@@ -52,12 +47,8 @@ class Provisioner:
         self.location = location
         self.logger = logger
 
-        self.iot_hub_client = IotHubClient(
-            credential, azure_subscription_id, api_version=iot_hub.IOT_HUB_MGMT_API_VER
-        )
-        self.cosmosdb_client = CosmosDBManagementClient(
-            credential, azure_subscription_id
-        )
+        self.iot_hub_client = IotHubClient(credential, azure_subscription_id, api_version=iot_hub.IOT_HUB_MGMT_API_VER)
+        self.cosmosdb_client = CosmosDBManagementClient(credential, azure_subscription_id)
         self.storage_client = StorageManagementClient(
             credential, azure_subscription_id, api_version=storage.STORAGE_MGMT_API_VER
         )
@@ -68,13 +59,7 @@ class Provisioner:
         )
 
     def _get_storage_acc_key(self) -> str:
-        return (
-            self.storage_client.storage_accounts.list_keys(
-                self.resource_group_name, self.storage_acc_name
-            )
-            .keys[1]
-            .value
-        )
+        return self.storage_client.storage_accounts.list_keys(self.resource_group_name, self.storage_acc_name).keys[1].value
 
     def _get_cosmosdb_uri_and_key(self) -> Tuple[str, str]:
         cosmosdb_uri = self.cosmosdb_client.database_accounts.get(
@@ -106,15 +91,11 @@ class Provisioner:
         return [
             {
                 "name": "AzureWebJobsStorage",
-                "value": STORAGE_CONN_STR_TEMPLATE.format(
-                    self.storage_acc_name, storage_acc_key
-                ),
+                "value": STORAGE_CONN_STR_TEMPLATE.format(self.storage_acc_name, storage_acc_key),
             },
             {
                 "name": "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING",
-                "value": STORAGE_CONN_STR_TEMPLATE.format(
-                    self.storage_acc_name, storage_acc_key
-                ),
+                "value": STORAGE_CONN_STR_TEMPLATE.format(self.storage_acc_name, storage_acc_key),
             },
             {
                 "name": f"{self.cosmosdb_name}{COSMOSDB_CONN_STR_POSTFIX}",
@@ -141,12 +122,7 @@ class Provisioner:
         ]
 
     def provision(self):
-        if (
-            self.website_client.web_apps.get(
-                self.resource_group_name, self.functions_name
-            )
-            is None
-        ):
+        if self.website_client.web_apps.get(self.resource_group_name, self.functions_name) is None:
             ip_sec = IpSecurityRestriction(
                 ip_address="Any",
                 action="Allow",
@@ -170,9 +146,7 @@ class Provisioner:
                 kind="functionapp",
                 location=self.location,
                 enabled=True,
-                server_farm_id=self.website_client.app_service_plans.get(
-                    self.resource_group_name, self.app_srv_plan_name
-                ).id,
+                server_farm_id=self.website_client.app_service_plans.get(self.resource_group_name, self.app_srv_plan_name).id,
                 reserved=False,
                 site_config=site_conf,
                 client_cert_mode="Required",
@@ -186,16 +160,9 @@ class Provisioner:
                 func_res = poller.result()
                 self.logger.info(f"Provisioned Azure Functions '{func_res.name}'")
             except ResourceExistsError as e:
-                if (
-                    not hasattr(e.response, "status_code")
-                    or e.response.status_code != 409
-                ):
+                if not hasattr(e.response, "status_code") or e.response.status_code != 409:
                     raise e
-                self.logger.error(
-                    f"Azure Functions name '{self.functions_name}' is not available"
-                )
+                self.logger.error(f"Azure Functions name '{self.functions_name}' is not available")
                 sys.exit(1)
         else:
-            self.logger.info(
-                f"Azure Functions '{self.functions_name}' is already provisioned"
-            )
+            self.logger.info(f"Azure Functions '{self.functions_name}' is already provisioned")

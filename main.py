@@ -6,16 +6,7 @@ import random
 # is installed automatically with the other libraries.
 from azure.identity import AzureCliCredential
 
-from services import (
-    app_srv_plan,
-    cosmosdb,
-    func_apps,
-    functions,
-    iot_devices,
-    iot_hub,
-    resource_group,
-    storage,
-)
+from services import app_srv_plan, cosmosdb, func_apps, functions, iot_devices, iot_hub, resource_group, storage
 from utils import logging
 
 # Constants we need in multiple places: the resource group name and the region
@@ -125,9 +116,7 @@ def main(args: argparse.Namespace):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "azure_subscription_id", type=str, help="Azure subscription ID."
-    )
+    parser.add_argument("azure_subscription_id", type=str, help="Azure subscription ID.")
     parser.add_argument(
         "vendor_credentials_path",
         type=str,
@@ -152,8 +141,7 @@ if __name__ == "__main__":
         "--device-ids-file-path",
         type=str,
         default="",
-        help="Path of the text file containing 1 "
-        "device id per line to be registered in IotHub.",
+        help="Path of the text file containing 1 " "device id per line to be registered in IotHub.",
     )
     parser.add_argument(
         "--cosmosdb-name",
@@ -183,8 +171,7 @@ if __name__ == "__main__":
         "--functions-code-path",
         type=str,
         default=DEFAULT_FUNCTIONS_CODE_PATH,
-        help="Path to the folder containing Azure Functions source code."
-        " Be warned that '.git' folder will be erased!",
+        help="Path to the folder containing Azure Functions source code." " Be warned that '.git' folder will be erased!",
     )
     parser.add_argument(
         "--location",

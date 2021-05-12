@@ -50,9 +50,7 @@ def provision(
     logger: logging.Logger,
 ):
     device_ids = load_file.load_device_ids(device_ids_file_path)
-    conn_str = iot_hub.get_connection_str(
-        credential, azure_subscription_id, resource_group_name, iot_hub_name
-    )
+    conn_str = iot_hub.get_connection_str(credential, azure_subscription_id, resource_group_name, iot_hub_name)
     iot_hub_reg_mgr = IoTHubRegistryManager(conn_str)
 
     device_keys = _DeviceKeys()
@@ -61,9 +59,7 @@ def provision(
         try:
             # Import the device identity to the IotHub
             # https://docs.microsoft.com/en-us/python/api/azure-iot-hub/azure.iot.hub.iothubregistrymanager?view=azure-python#create-device-with-sas-device-id--primary-key--secondary-key--status--iot-edge-false-
-            iot_hub_reg_mgr.create_device_with_sas(
-                device_id, primary_key, secondary_key, "enabled"
-            )
+            iot_hub_reg_mgr.create_device_with_sas(device_id, primary_key, secondary_key, "enabled")
             logger.info(f"Device '{device_id}' is registered to IotHub")
         except HttpOperationError as e:
             if not hasattr(e.response, "status_code") or e.response.status_code != 409:

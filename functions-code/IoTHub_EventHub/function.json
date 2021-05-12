@@ -1,6 +1,5 @@
 {
-  "bindings": [
-    {
+  "bindings": [{
       "type": "eventHubTrigger",
       "name": "IoTHubMessages",
       "direction": "in",

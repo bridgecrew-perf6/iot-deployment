@@ -1,6 +1,5 @@
 {
-  "bindings": [
-    {
+  "bindings": [{
       "name": "myTimer",
       "type": "timerTrigger",
       "direction": "in",
