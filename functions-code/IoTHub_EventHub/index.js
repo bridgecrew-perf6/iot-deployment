@@ -3,17 +3,29 @@ module.exports = function (context, IoTHubMessages) {
         return;
     }
 
-    var i = IoTHubMessages.length - 1;
-    while (i >= 0) {
-        if (!("deviceVendor" in IoTHubMessages[i])) {
-            IoTHubMessages.splice(i, 1);
-        } else {
-            IoTHubMessages[i].deviceId = context.bindingData.systemPropertiesArray[i]["iothub-connection-device-id"];
-            IoTHubMessages[i].enqueuedTimeUtc = context.bindingData.enqueuedTimeUtcArray[i];
+    var [output_vemcon, output_mts_smart] = [
+        [],
+        []
+    ];
+    IoTHubMessages.forEach((message, i) => {
+        if ("deviceVendor" in message) {
+            message.deviceId = context.bindingData.systemPropertiesArray[i]["iothub-connection-device-id"];
+            message.enqueuedTimeUtc = context.bindingData.enqueuedTimeUtcArray[i];
+            switch (message["deviceVendor"]) {
+                case "vemcon":
+                    output_vemcon.push(message);
+                    break;
+                case "mts_smart":
+                    output_mts_smart.push(message);
+                    break;
+                default:
+                    break;
+            }
         }
-        i -= 1;
-    }
-    context.bindings.outputDocument = IoTHubMessages;
+    });
+
+    context.bindings.outputDocument_vemcon = output_vemcon;
+    context.bindings.outputDocument_mts_smart = output_mts_smart;
 
     context.done();
 };
