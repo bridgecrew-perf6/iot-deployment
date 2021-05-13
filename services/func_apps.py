@@ -56,7 +56,7 @@ class Provisioner:
 
     def provision(self):
         self._repo_init()
-        # Provision the Azure function app triggered by incoming CosmosDB messages.
+        # Provision the Azure function app triggered by incoming Cosmos DB messages.
         # It will redirect these messages to the latest messages container.
         for vendor_name in cosmosdb.VENDOR_NAMES:
             self._configure_cosmos_messages_func_app(vendor_name)

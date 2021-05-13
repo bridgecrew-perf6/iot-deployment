@@ -56,7 +56,7 @@ def main(args: argparse.Namespace):
         logger,
     )
 
-    # Step 4: Provision the CosmosDB and initialize it.
+    # Step 4: Provision the Cosmos DB and initialize it.
     cosmosdb.Provisioner(
         credential,
         args.azure_subscription_id,
@@ -147,7 +147,7 @@ if __name__ == "__main__":
         "--cosmosdb-name",
         type=str,
         default=DEFAULT_COSMOSDB_NAME,
-        help="CosmosDB name for the deployment.",
+        help="Cosmos DB name for the deployment.",
     )
     parser.add_argument(
         "--app-srv-plan-name",

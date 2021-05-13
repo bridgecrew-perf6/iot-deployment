@@ -43,7 +43,7 @@ class Provisioner:
             for desc_list_res in self.cosmosdb_client.database_accounts.list_by_resource_group(self.resource_group_name)
         }:
             if self.cosmosdb_client.database_accounts.check_name_exists(self.cosmosdb_name):
-                self.logger.error(f"CosmosDB name '{self.cosmosdb_name}' is not available")
+                self.logger.error(f"Cosmos DB name '{self.cosmosdb_name}' is not available")
                 sys.exit(1)
             upd_params = DatabaseAccountCreateUpdateParameters(
                 locations=[Location(location_name=self.location, failover_priority=0)],
@@ -66,11 +66,11 @@ class Provisioner:
                 self.resource_group_name, self.cosmosdb_name, upd_params
             )
             cosmosdb_res = poller.result()
-            self.logger.info(f"Provisioned CosmosDB '{cosmosdb_res.name}'")
+            self.logger.info(f"Provisioned Cosmos DB '{cosmosdb_res.name}'")
         else:
-            self.logger.info(f"CosmosDB '{self.cosmosdb_name}' is already provisioned")
+            self.logger.info(f"Cosmos DB '{self.cosmosdb_name}' is already provisioned")
 
-        # Initialize the CosmosDB with a database named "iot" and
+        # Initialize the Cosmos DB with a database named "iot" and
         # 2 collections named "messages" and "latest_messages"
         self._initialize()
 
@@ -80,9 +80,9 @@ class Provisioner:
         cosmos_client = CosmosClient(acc_res.document_endpoint, keys.secondary_master_key)
         try:
             cosmos_client.create_database(COSMOSDB_DB_NAME, populate_query_metrics=True, offer_throughput=400)
-            self.logger.info(f"'{COSMOSDB_DB_NAME}' database is created in CosmosDB")
+            self.logger.info(f"'{COSMOSDB_DB_NAME}' database is created in Cosmos DB")
         except CosmosResourceExistsError:
-            self.logger.info(f"CosmosDB already has '{COSMOSDB_DB_NAME}' database")
+            self.logger.info(f"Cosmos DB already has '{COSMOSDB_DB_NAME}' database")
 
         db_proxy = cosmos_client.get_database_client(COSMOSDB_DB_NAME)
         for vendor_name in VENDOR_NAMES:

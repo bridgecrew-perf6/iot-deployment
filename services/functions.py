@@ -83,7 +83,7 @@ class Provisioner:
     def _get_app_settings(self) -> List[Dict]:
         # Get the Storage account key.
         storage_acc_key = self._get_storage_acc_key()
-        # Get the CosmosDB uri and key.
+        # Get the Cosmos DB uri and key.
         cosmosdb_uri, cosmosdb_key = self._get_cosmosdb_uri_and_key()
         # Get the IotHub properties and key.
         props, iot_hub_key = self._get_iot_hub_key()
