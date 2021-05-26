@@ -4,7 +4,7 @@ from azure.identity import AzureCliCredential
 from azure.mgmt.resource import ResourceManagementClient
 from azure.mgmt.resource.resources.models import ResourceGroup
 
-RESOURCE_MGMT_API_VER = "2020-10-01"
+RESOURCE_MGMT_API_VER = "2021-04-01"
 
 
 def provision(

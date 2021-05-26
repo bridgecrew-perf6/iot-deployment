@@ -6,7 +6,6 @@ azure-mgmt-cosmosdb
 azure-mgmt-iothub
 azure-mgmt-resource
 azure-mgmt-storage
-azure-mgmt-storage
 azure-mgmt-web
 msrest
 msrestazure

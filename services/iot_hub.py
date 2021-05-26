@@ -5,7 +5,7 @@ from azure.identity import AzureCliCredential
 from azure.mgmt.iothub import IotHubClient
 from azure.mgmt.iothub.models import IotHubDescription, IotHubProperties, IotHubSkuInfo, OperationInputs
 
-IOT_HUB_MGMT_API_VER = "2020-03-01"
+IOT_HUB_MGMT_API_VER = "2021-03-31"
 SHARED_ACCESS_KEY_NAME = "iothubowner"
 IOT_HUB_CONN_STR_TEMPLATE = "HostName={};SharedAccessKeyName={};SharedAccessKey={}"
 

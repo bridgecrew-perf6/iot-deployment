@@ -5,7 +5,7 @@ from azure.identity import AzureCliCredential
 from azure.mgmt.storage import StorageManagementClient
 from azure.mgmt.storage.models import Sku, StorageAccountCheckNameAvailabilityParameters, StorageAccountCreateParameters
 
-STORAGE_MGMT_API_VER = "2021-02-01"
+STORAGE_MGMT_API_VER = "2021-04-01"
 
 
 def provision(

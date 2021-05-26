@@ -4,7 +4,7 @@ from azure.identity import AzureCliCredential
 from azure.mgmt.web import WebSiteManagementClient
 from azure.mgmt.web.models import AppServicePlan, SkuDescription
 
-WEBSITE_MGMT_API_VER = "2020-09-01"
+WEBSITE_MGMT_API_VER = "2020-12-01"
 
 
 def provision(
