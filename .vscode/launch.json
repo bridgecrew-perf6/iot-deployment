@@ -12,6 +12,7 @@
             "console": "integratedTerminal",
             "cwd": "${workspaceFolder}",
             "args": [
+                "deploy",
                 "d74ce0e8-f6a3-4003-9947-c7f593ee842b",
                 "./configs/vendor_credentials.json",
                 "--resource-group-name",
