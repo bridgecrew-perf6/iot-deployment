@@ -14,20 +14,24 @@ class OnboardParser(BaseParser):
         super().__init__(arg_list=arg_list, parser=parser)
 
     def _add_arguments(self):
-        self._parser.add_argument("azure_subscription_id", type=str, help="Azure subscription ID.")
+        # Do not use positional arguments, to prevent possible collision with subcommand names!
+        self._parser.add_argument("--azure-subscription-id", type=str, required=True, help="Azure subscription ID.")
         self._parser.add_argument(
-            "resource_group_name",
+            "--resource-group-name",
             type=str,
+            required=True,
             help="Resource group name for the device onboarding.",
         )
         self._parser.add_argument(
-            "iot_hub_name",
+            "--iot-hub-name",
             type=str,
+            required=True,
             help="IotHub name for the device onboarding.",
         )
         self._parser.add_argument(
-            "device_ids_file_path",
+            "--device-ids-file-path",
             type=str,
+            required=True,
             help="Path of the text file containing 1 device id per line to be registered in IotHub.",
         )
 

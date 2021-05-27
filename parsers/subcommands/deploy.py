@@ -27,10 +27,12 @@ class DeployParser(BaseParser):
         super().__init__(arg_list=arg_list, parser=parser)
 
     def _add_arguments(self):
-        self._parser.add_argument("azure_subscription_id", type=str, help="Azure subscription ID.")
+        # Do not use positional arguments, to prevent possible collision with subcommand names!
+        self._parser.add_argument("--azure-subscription-id", type=str, required=True, help="Azure subscription ID.")
         self._parser.add_argument(
-            "vendor_credentials_path",
+            "--vendor-credentials-path",
             type=str,
+            required=True,
             help="Path to a JSON file containing credentials for each device vendor server."
             " The JSON object must be of the following format:\n"
             '{"vendor1": {"endpoint_uri1": {"x-api-key": API_KEY}, '

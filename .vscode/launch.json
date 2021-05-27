@@ -13,7 +13,9 @@
             "cwd": "${workspaceFolder}",
             "args": [
                 "deploy",
+                "--azure-subscription-id",
                 "d74ce0e8-f6a3-4003-9947-c7f593ee842b",
+                "--vendor-credentials-path",
                 "./configs/vendor_credentials.json",
                 "--resource-group-name",
                 "IoT-project",

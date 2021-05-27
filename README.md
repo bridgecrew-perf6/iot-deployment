@@ -43,9 +43,11 @@ The following steps of Azure service deployment are executed by the deployment s
     -h, --help        show this help message and exit
 
 ### `deploy` subcommand usage:
-    usage: main.py deploy [-h] [--resource-group-name RESOURCE_GROUP_NAME]
+    usage: main.py deploy [-h] --azure-subscription-id AZURE_SUBSCRIPTION_ID   
+                        --vendor-credentials-path VENDOR_CREDENTIALS_PATH    
+                        [--resource-group-name RESOURCE_GROUP_NAME]
                         [--iot-hub-name IOT_HUB_NAME]
-                        [--device-ids-file-path DEVICE_IDS_FILE_PATH]
+                        [--device-ids-file-path DEVICE_IDS_FILE_PATH]        
                         [--cosmosdb-name COSMOSDB_NAME]
                         [--app-srv-plan-name APP_SRV_PLAN_NAME]
                         [--storage-acc-name STORAGE_ACC_NAME]
@@ -54,20 +56,17 @@ The following steps of Azure service deployment are executed by the deployment s
                         [--location LOCATION]
                         [--logging-level {DEBUG,INFO,WARNING,ERROR,CRITICAL}]
                         [--verbose]
-                        azure_subscription_id vendor_credentials_path
 
-    positional arguments:
-    azure_subscription_id
+    optional arguments:
+    -h, --help            show this help message and exit
+    --azure-subscription-id AZURE_SUBSCRIPTION_ID
                             Azure subscription ID.
-    vendor_credentials_path
+    --vendor-credentials-path VENDOR_CREDENTIALS_PATH
                             Path to a JSON file containing credentials for each
                             device vendor server. The JSON object must be of the
                             following format: {"vendor1": {"endpoint_uri1":
                             {"x-api-key": API_KEY}, "endpoint_uri2": {"username":
                             USERNAME, "password": PASSWORD}}, ...}
-
-    optional arguments:
-    -h, --help            show this help message and exit
     --resource-group-name RESOURCE_GROUP_NAME
                             Resource group name for the deployment.
     --iot-hub-name IOT_HUB_NAME
@@ -92,17 +91,19 @@ The following steps of Azure service deployment are executed by the deployment s
     --verbose, -v         The flag for whether there should be logging messages.
 
 ### `onboard` subcommand usage:
-    usage: main.py onboard [-h]
-                        azure_subscription_id resource_group_name iot_hub_name
-                        device_ids_file_path
-
-    positional arguments:
-    azure_subscription_id
-                            Azure subscription ID.
-    resource_group_name   Resource group name for the device onboarding.
-    iot_hub_name          IotHub name for the device onboarding.
-    device_ids_file_path  Path of the text file containing 1 device id per line
-                            to be registered in IotHub.
+    usage: main.py onboard [-h] --azure-subscription-id AZURE_SUBSCRIPTION_ID
+                        --resource-group-name RESOURCE_GROUP_NAME
+                        --iot-hub-name IOT_HUB_NAME --device-ids-file-path
+                        DEVICE_IDS_FILE_PATH
 
     optional arguments:
     -h, --help            show this help message and exit
+    --azure-subscription-id AZURE_SUBSCRIPTION_ID
+                            Azure subscription ID.
+    --resource-group-name RESOURCE_GROUP_NAME
+                            Resource group name for the device onboarding.
+    --iot-hub-name IOT_HUB_NAME
+                            IotHub name for the device onboarding.
+    --device-ids-file-path DEVICE_IDS_FILE_PATH
+                            Path of the text file containing 1 device id per line
+                            to be registered in IotHub.
