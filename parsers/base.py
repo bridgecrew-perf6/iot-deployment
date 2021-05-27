@@ -1,10 +1,7 @@
 import abc
 import argparse
 import sys
-from typing import List, Optional, Tuple
-
-from azure.identity import AzureCliCredential
-from utils import logging
+from typing import List, Optional
 
 
 class BaseParser(abc.ABC):
@@ -26,9 +23,3 @@ class BaseParser(abc.ABC):
     @abc.abstractmethod
     def execute(self):
         raise NotImplementedError
-
-    def get_logger_and_credential(self, args: argparse.Namespace) -> Tuple[logging.Logger, AzureCliCredential]:
-        logger = logging.configure_app_logger(args)
-        # Acquire a credential object using CLI-based authentication.
-        credential = AzureCliCredential()
-        return logger, credential

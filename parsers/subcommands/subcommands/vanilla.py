@@ -3,10 +3,7 @@ import random
 from typing import List, Optional
 
 from parsers.base import BaseParser
-from parsers.subparser import SubcommandInfo, SubcommandParser
-from tasks import deploy
-
-from .subcommands.vanilla import VanillaParser
+from tasks import deploy_vanilla
 
 # Constants we need in multiple places: the resource group name and the region
 # in which we provision resources. You can change these values however you want.
@@ -17,33 +14,9 @@ DEFAULT_APP_SRV_PLAN_NAME = f"ASP-materialfluss{random.randint(1,100000):05}"
 DEFAULT_STORAGE_ACC_NAME = f"storage0materialfluss{random.randint(1,100000):05}"
 DEFAULT_FUNCTIONS_NAME = f"functions-materialfluss{random.randint(1,100000):05}"
 DEFAULT_LOCATION = "North Europe"
-VANILLA_SUBCOMMAND = "vanilla"
 
 
-class DeployParser(SubcommandParser):
-    def __init__(
-        self,
-        arg_list: List[str],
-        parser: Optional[argparse.ArgumentParser],
-    ):
-        subcommands = {
-            VANILLA_SUBCOMMAND: SubcommandInfo(
-                self.vanilla, {}, "Subcommand to deploy vanilla Azure infrastructure (without OPC UA integration)."
-            ),
-        }
-        no_subcommand_case = SubcommandInfo(self.full_deployment, {}, None)
-        super().__init__(subcommands, no_subcommand_case=no_subcommand_case, arg_list=arg_list, parser=parser)
-
-    def vanilla(self):
-        vanilla_parser = VanillaParser(self._arg_list[1:], self._subcommand_parsers[VANILLA_SUBCOMMAND])
-        vanilla_parser.execute()
-
-    def full_deployment(self):
-        no_subcommand_parser = NoSubcommandParser(self._arg_list, self._parser)
-        no_subcommand_parser.execute()
-
-
-class NoSubcommandParser(BaseParser):
+class VanillaParser(BaseParser):
     def __init__(
         self,
         arg_list: List[str],
@@ -133,4 +106,4 @@ class NoSubcommandParser(BaseParser):
 
     def execute(self):
         args = self._parser.parse_args(self._arg_list)
-        deploy.task_func(args)
+        deploy_vanilla.task_func(args)

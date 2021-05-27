@@ -29,10 +29,11 @@ class SubcommandParser(BaseParser):
             len(self._arg_list) == 0 or self._arg_list[0] not in self._subcommands
         )
 
-    def _add_arguments(self):
-        if self.is_no_subcommand():
-            return
-        subparser = self._parser.add_subparsers()
+    def _add_subparsers(self):
+        subparser = self._parser.add_subparsers(
+            title="Subcommands",
+            description=None if self._no_subcommand_case is None else "For this command, no subcommand is also possible.",
+        )
         for subcommand, info in self._subcommands.items():
             if info.help_text is None:
                 subcommand_parser = subparser.add_parser(subcommand)
@@ -42,9 +43,12 @@ class SubcommandParser(BaseParser):
             subcommand_parser.set_defaults(subcommand_kwargs=info.kwargs)
             self._subcommand_parsers[subcommand] = subcommand_parser
 
+    def _add_arguments(self):
+        self._add_subparsers()
+
     def execute(self):
         if self.is_no_subcommand():
-            self._no_subcommand_case.func(self._no_subcommand_case.kwargs)
+            self._no_subcommand_case.func(**self._no_subcommand_case.kwargs)
             return
         args = self._parser.parse_args(self._arg_list[:1])
         args.subcommand_func(**args.subcommand_kwargs)
