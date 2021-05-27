@@ -88,19 +88,6 @@ class VanillaParser(BaseParser):
             default=DEFAULT_LOCATION,
             help="Location of the Azure datacenter to deploy.",
         )
-        self._parser.add_argument(
-            "--logging-level",
-            type=str,
-            choices=["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"],
-            default="INFO",
-            help="Logging level of the program.",
-        )
-        self._parser.add_argument(
-            "--verbose",
-            "-v",
-            action="store_true",
-            help="The flag for whether there should be logging messages.",
-        )
 
     def execute(self):
         args = self._parser.parse_args(self._arg_list)

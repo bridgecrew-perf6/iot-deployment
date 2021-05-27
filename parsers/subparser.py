@@ -22,7 +22,7 @@ class SubcommandParser(BaseParser):
         self._subcommands = subcommands
         self._no_subcommand_case = no_subcommand_case
         self._subcommand_parsers: Dict[str, argparse.ArgumentParser] = {}
-        super().__init__(arg_list, parser)
+        super().__init__(arg_list=arg_list, parser=parser, add_common_args=False)
 
     def is_no_subcommand(self) -> bool:
         return self._no_subcommand_case is not None and (
