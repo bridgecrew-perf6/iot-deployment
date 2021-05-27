@@ -34,7 +34,7 @@ def provision(
             enable_https_traffic_only=True,
             minimum_tls_version="TLS1_2",
         )
-        # https://docs.microsoft.com/en-us/python/api/azure-mgmt-storage/azure.mgmt.storage.v2021_02_01.operations.storageaccountsoperations?view=azure-python#begin-create-resource-group-name--account-name--parameters----kwargs-
+        # https://docs.microsoft.com/en-us/python/api/azure-mgmt-storage/azure.mgmt.storage.v2021_04_01.operations.storageaccountsoperations?view=azure-python#begin-create-resource-group-name--account-name--parameters----kwargs-
         poller = storage_client.storage_accounts.begin_create(resource_group_name, storage_acc_name, params)
         storage_res = poller.result()
         logger.info(f"Provisioned Storage account '{storage_res.name}'")

@@ -19,7 +19,7 @@ def provision(
     logger: logging.Logger,
 ):
     iot_hub_client = IotHubClient(credential, azure_subscription_id, api_version=IOT_HUB_MGMT_API_VER)
-    # https://docs.microsoft.com/en-us/python/api/azure-mgmt-iothub/azure.mgmt.iothub.v2020_03_01.operations.iothubresourceoperations?view=azure-python#list-by-resource-group-resource-group-name----kwargs-
+    # https://docs.microsoft.com/en-us/python/api/azure-mgmt-iothub/azure.mgmt.iothub.v2021_03_31.operations.iothubresourceoperations?view=azure-python#list-by-resource-group-resource-group-name----kwargs-
     if iot_hub_name not in {
         desc_list_res.name for desc_list_res in iot_hub_client.iot_hub_resource.list_by_resource_group(resource_group_name)
     }:
@@ -49,7 +49,7 @@ def get_connection_str(
     iot_hub_name: str,
 ) -> str:
     iot_hub_client = IotHubClient(credential, azure_subscription_id, api_version=IOT_HUB_MGMT_API_VER)
-    # https://docs.microsoft.com/en-us/python/api/azure-mgmt-iothub/azure.mgmt.iothub.v2020_03_01.operations.iothubresourceoperations?view=azure-python#get-keys-for-key-name-resource-group-name--resource-name--key-name----kwargs-
+    # https://docs.microsoft.com/en-us/python/api/azure-mgmt-iothub/azure.mgmt.iothub.v2021_03_31.operations.iothubresourceoperations?view=azure-python#get-keys-for-key-name-resource-group-name--resource-name--key-name----kwargs-
     sas_auth_rule = iot_hub_client.iot_hub_resource.get_keys_for_key_name(
         resource_group_name, iot_hub_name, SHARED_ACCESS_KEY_NAME
     )

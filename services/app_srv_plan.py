@@ -16,7 +16,7 @@ def provision(
     logger: logging.Logger,
 ):
     website_client = WebSiteManagementClient(credential, azure_subscription_id, api_version=WEBSITE_MGMT_API_VER)
-    # https://docs.microsoft.com/en-us/python/api/azure-mgmt-web/azure.mgmt.web.v2020_09_01.operations.appserviceplansoperations?view=azure-python#list-by-resource-group-resource-group-name----kwargs-
+    # https://docs.microsoft.com/en-us/python/api/azure-mgmt-web/azure.mgmt.web.v2020_12_01.operations.appserviceplansoperations?view=azure-python#list-by-resource-group-resource-group-name----kwargs-
     if app_srv_plan_name not in {
         desc_list_res.name for desc_list_res in website_client.app_service_plans.list_by_resource_group(resource_group_name)
     }:

@@ -72,9 +72,9 @@ class Provisioner:
 
         # Initialize the Cosmos DB with a database named "iot" and
         # 2 collections named "messages" and "latest_messages"
-        self._initialize()
+        self._initialize_db()
 
-    def _initialize(self):
+    def _initialize_db(self):
         keys = self.cosmosdb_client.database_accounts.list_keys(self.resource_group_name, self.cosmosdb_name)
         acc_res = self.cosmosdb_client.database_accounts.get(self.resource_group_name, self.cosmosdb_name)
         cosmos_client = CosmosClient(acc_res.document_endpoint, keys.secondary_master_key)

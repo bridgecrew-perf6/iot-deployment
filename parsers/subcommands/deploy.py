@@ -4,6 +4,8 @@ from typing import List, Optional
 from parsers.arg_defaults import (
     DEFAULT_APP_SRV_PLAN_NAME,
     DEFAULT_COSMOSDB_NAME,
+    DEFAULT_EVENT_HUB_NAME,
+    DEFAULT_EVENT_HUB_NAMESPACE,
     DEFAULT_FUNCTIONS_NAME,
     DEFAULT_IOT_HUB_NAME,
     DEFAULT_LOCATION,
@@ -109,6 +111,18 @@ class NoSubcommandParser(BaseParser):
             type=str,
             default="",
             help="Path to the folder containing Azure Functions source code." " Be warned that '.git' folder will be erased!",
+        )
+        self._parser.add_argument(
+            "--event-hub-namespace",
+            type=str,
+            default=DEFAULT_EVENT_HUB_NAMESPACE,
+            help="Name of the EventHub namespace to deploy.",
+        )
+        self._parser.add_argument(
+            "--event-hub-name",
+            type=str,
+            default=DEFAULT_EVENT_HUB_NAME,
+            help="Name of the EventHub to deploy inside the EventHub namespace.",
         )
         self._parser.add_argument(
             "--location",

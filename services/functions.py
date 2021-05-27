@@ -130,7 +130,7 @@ class Provisioner:
                 name="Allow all",
                 description="Allow all access",
             )
-            # https://docs.microsoft.com/en-us/python/api/azure-mgmt-web/azure.mgmt.web.v2020_09_01.models.siteconfig?view=azure-python
+            # https://docs.microsoft.com/en-us/python/api/azure-mgmt-web/azure.mgmt.web.v2020_12_01.models.siteconfig?view=azure-python
             site_conf = SiteConfig(
                 app_settings=self._get_app_settings(),
                 managed_pipeline_mode="Integrated",
@@ -141,7 +141,7 @@ class Provisioner:
                 min_tls_version="1.2",
                 ftps_state="FtpsOnly",
             )
-            # https://docs.microsoft.com/en-us/python/api/azure-mgmt-web/azure.mgmt.web.v2020_09_01.models.site?view=azure-python
+            # https://docs.microsoft.com/en-us/python/api/azure-mgmt-web/azure.mgmt.web.v2020_12_01.models.site?view=azure-python
             site = Site(
                 kind="functionapp",
                 location=self.location,
@@ -153,7 +153,7 @@ class Provisioner:
                 https_only=True,
             )
             try:
-                # https://docs.microsoft.com/en-us/python/api/azure-mgmt-web/azure.mgmt.web.v2020_09_01.operations.webappsoperations?view=azure-python#begin-create-or-update-resource-group-name--name--site-envelope----kwargs-
+                # https://docs.microsoft.com/en-us/python/api/azure-mgmt-web/azure.mgmt.web.v2020_12_01.operations.webappsoperations?view=azure-python#begin-create-or-update-resource-group-name--name--site-envelope----kwargs-
                 poller = self.website_client.web_apps.begin_create_or_update(
                     self.resource_group_name, self.functions_name, site
                 )
