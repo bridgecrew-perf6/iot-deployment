@@ -1,5 +1,4 @@
 import argparse
-import os
 import random
 from typing import List, Optional
 
@@ -14,7 +13,6 @@ DEFAULT_COSMOSDB_NAME = f"cosmosdb-materialfluss{random.randint(1,100000):05}"
 DEFAULT_APP_SRV_PLAN_NAME = f"ASP-materialfluss{random.randint(1,100000):05}"
 DEFAULT_STORAGE_ACC_NAME = f"storage0materialfluss{random.randint(1,100000):05}"
 DEFAULT_FUNCTIONS_NAME = f"functions-materialfluss{random.randint(1,100000):05}"
-DEFAULT_FUNCTIONS_CODE_PATH = os.path.join(".", "functions-code")
 DEFAULT_LOCATION = "North Europe"
 
 
@@ -83,7 +81,7 @@ class DeployParser(BaseParser):
         self._parser.add_argument(
             "--functions-code-path",
             type=str,
-            default=DEFAULT_FUNCTIONS_CODE_PATH,
+            default="",
             help="Path to the folder containing Azure Functions source code." " Be warned that '.git' folder will be erased!",
         )
         self._parser.add_argument(

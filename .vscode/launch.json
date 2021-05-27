@@ -31,6 +31,8 @@
                 "storage0materialfluss",
                 "--functions-name",
                 "functions-materialfluss",
+                "--functions-code-path",
+                "./functions-code",
                 "--location",
                 "West Europe",
                 "--verbose",

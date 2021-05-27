@@ -55,6 +55,8 @@ class Provisioner:
         self.functions_copy_path: Optional[str] = None
 
     def provision(self):
+        if not self.functions_code_path:
+            return
         self._repo_init()
         # Provision the Azure function app triggered by incoming Cosmos DB messages.
         # It will redirect these messages to the latest messages container.
