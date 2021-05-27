@@ -8,6 +8,7 @@ from parsers.arg_defaults import (
     DEFAULT_EVENT_HUB_NAMESPACE,
     DEFAULT_FUNCTIONS_NAME,
     DEFAULT_IOT_HUB_NAME,
+    DEFAULT_KEY_VAULT_NAME,
     DEFAULT_LOCATION,
     DEFAULT_RESOURCE_GROUP_NAME,
     DEFAULT_SERVICE_BUS_NAMESPACE,
@@ -64,6 +65,12 @@ class NoSubcommandParser(BaseParser):
             " The JSON object must be of the following format:\n"
             '{"vendor1": {"endpoint_uri1": {"x-api-key": API_KEY}, '
             '"endpoint_uri2": {"username": USERNAME, "password": PASSWORD}}, ...}',
+        )
+        self._parser.add_argument(
+            "--tenant-id",
+            type=str,
+            required=True,
+            help="The Azure Active Directory tenant ID that should be used for authenticating requests to the key vault.",
         )
         self._parser.add_argument(
             "--resource-group-name",
@@ -130,6 +137,9 @@ class NoSubcommandParser(BaseParser):
             type=str,
             default=DEFAULT_SERVICE_BUS_NAMESPACE,
             help="Name of the ServiceBus for the deployment.",
+        )
+        self._parser.add_argument(
+            "--key-vault-name", type=str, default=DEFAULT_KEY_VAULT_NAME, help="Name of the Key Vault for the deployment."
         )
         self._parser.add_argument(
             "--location",

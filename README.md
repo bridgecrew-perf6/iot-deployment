@@ -44,19 +44,20 @@ The following steps of Azure service provisioning are executed by the deployment
 
 ### `deploy` subcommand usage:
     usage: main.py deploy [-h] --azure-subscription-id AZURE_SUBSCRIPTION_ID
-                          --vendor-credentials-path VENDOR_CREDENTIALS_PATH
-                          [--resource-group-name RESOURCE_GROUP_NAME]
+                          --vendor-credentials-path VENDOR_CREDENTIALS_PATH 
+                          --tenant-id TENANT_ID
+                          [--resource-group-name RESOURCE_GROUP_NAME]       
                           [--iot-hub-name IOT_HUB_NAME]
-                          [--device-ids-file-path DEVICE_IDS_FILE_PATH]
+                          [--device-ids-file-path DEVICE_IDS_FILE_PATH]     
                           [--cosmosdb-name COSMOSDB_NAME]
                           [--app-srv-plan-name APP_SRV_PLAN_NAME]
                           [--storage-acc-name STORAGE_ACC_NAME]
                           [--functions-name FUNCTIONS_NAME]
-                          [--functions-code-path FUNCTIONS_CODE_PATH]
-                          [--event-hub-namespace EVENT_HUB_NAMESPACE]
+                          [--functions-code-path FUNCTIONS_CODE_PATH]       
+                          [--event-hub-namespace EVENT_HUB_NAMESPACE]       
                           [--event-hub-name EVENT_HUB_NAME]
                           [--service-bus-namespace SERVICE_BUS_NAMESPACE]
-                          [--location LOCATION]
+                          [--key-vault-name KEY_VAULT_NAME] [--location LOCATION]
                           [--logging-level {DEBUG,INFO,WARNING,ERROR,CRITICAL}]
                           [--verbose]
                           {vanilla} ...
@@ -71,6 +72,9 @@ The following steps of Azure service provisioning are executed by the deployment
                             following format: {"vendor1": {"endpoint_uri1":
                             {"x-api-key": API_KEY}, "endpoint_uri2": {"username":
                             USERNAME, "password": PASSWORD}}, ...}
+      --tenant-id TENANT_ID
+                            The Azure Active Directory tenant ID that should be
+                            used for authenticating requests to the key vault.
       --resource-group-name RESOURCE_GROUP_NAME
                             Resource group name for the deployment.
       --iot-hub-name IOT_HUB_NAME
@@ -96,6 +100,8 @@ The following steps of Azure service provisioning are executed by the deployment
                             namespace.
       --service-bus-namespace SERVICE_BUS_NAMESPACE
                             Name of the ServiceBus for the deployment.
+      --key-vault-name KEY_VAULT_NAME
+                            Name of the Key Vault for the deployment.
       --location LOCATION   Location of the Azure datacenter for the deployment.
       --logging-level {DEBUG,INFO,WARNING,ERROR,CRITICAL}
                             Logging level of the program.

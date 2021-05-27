@@ -1,6 +1,6 @@
 import argparse
 
-from services import event_hub, service_bus
+from services import event_hub, key_vault, service_bus
 from utils import get_logger_and_credential
 
 from . import deploy_vanilla
@@ -27,6 +27,16 @@ def task_func(args: argparse.Namespace):
         args.azure_subscription_id,
         args.resource_group_name,
         args.service_bus_namespace,
+        args.location,
+        logger,
+    )
+    # Step 11: Provision the Key Vault.
+    key_vault.provision(
+        credential,
+        args.azure_subscription_id,
+        args.resource_group_name,
+        args.key_vault_name,
+        args.tenant_id,
         args.location,
         logger,
     )

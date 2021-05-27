@@ -10,6 +10,7 @@ azure-common==1.1.27
     # via
     #   azure-mgmt-cosmosdb
     #   azure-mgmt-iothub
+    #   azure-mgmt-keyvault
     #   azure-mgmt-resource
     #   azure-mgmt-servicebus
     #   azure-mgmt-storage
@@ -30,6 +31,7 @@ azure-mgmt-core==1.2.2
     # via
     #   azure-mgmt-cosmosdb
     #   azure-mgmt-iothub
+    #   azure-mgmt-keyvault
     #   azure-mgmt-resource
     #   azure-mgmt-servicebus
     #   azure-mgmt-storage
@@ -37,6 +39,8 @@ azure-mgmt-core==1.2.2
 azure-mgmt-cosmosdb==6.3.0
     # via -r requirements.in
 azure-mgmt-iothub==2.0.0
+    # via -r requirements.in
+azure-mgmt-keyvault==9.0.0
     # via -r requirements.in
 azure-mgmt-resource==18.0.0
     # via -r requirements.in
@@ -83,6 +87,7 @@ msrest==0.6.21
     #   azure-iot-hub
     #   azure-mgmt-cosmosdb
     #   azure-mgmt-iothub
+    #   azure-mgmt-keyvault
     #   azure-mgmt-resource
     #   azure-mgmt-servicebus
     #   azure-mgmt-storage
