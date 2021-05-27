@@ -29,17 +29,17 @@ class DeployParser(SubcommandParser):
     ):
         subcommands = {
             VANILLA_SUBCOMMAND: SubcommandInfo(
-                self.vanilla, {}, "Subcommand to deploy vanilla Azure infrastructure (without OPC UA integration)."
+                self._vanilla, {}, "Subcommand to deploy vanilla Azure infrastructure (without OPC UA integration)."
             ),
         }
-        no_subcommand_case = SubcommandInfo(self.full_deployment, {}, None)
+        no_subcommand_case = SubcommandInfo(self._full_deployment, {}, None)
         super().__init__(subcommands, no_subcommand_case=no_subcommand_case, arg_list=arg_list, parser=parser)
 
-    def vanilla(self):
+    def _vanilla(self):
         vanilla_parser = VanillaParser(self._arg_list[1:], self._subcommand_parsers[VANILLA_SUBCOMMAND])
         vanilla_parser.execute()
 
-    def full_deployment(self):
+    def _full_deployment(self):
         no_subcommand_parser = NoSubcommandParser(self._arg_list, self._parser)
         no_subcommand_parser.execute()
 

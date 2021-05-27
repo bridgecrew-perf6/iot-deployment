@@ -12,9 +12,9 @@ ONBOARD_SUBCOMMAND = "onboard"
 class MainParser(SubcommandParser):
     def __init__(self):
         subcommands = {
-            DEPLOY_SUBCOMMAND: SubcommandInfo(self.deploy, {}, "Subcommand to deploy the Azure infrastructure."),
+            DEPLOY_SUBCOMMAND: SubcommandInfo(self._deploy, {}, "Subcommand to deploy the Azure infrastructure."),
             ONBOARD_SUBCOMMAND: SubcommandInfo(
-                self.onboard, {}, "Subcommand for batch device onboarding into the Azure IotHub."
+                self._onboard, {}, "Subcommand for batch device onboarding into the Azure IotHub."
             ),
         }
         no_subcommand_case = None
@@ -22,10 +22,10 @@ class MainParser(SubcommandParser):
         parser = argparse.ArgumentParser()
         super().__init__(subcommands, no_subcommand_case=no_subcommand_case, arg_list=arg_list, parser=parser)
 
-    def deploy(self):
+    def _deploy(self):
         deploy_parser = DeployParser(self._arg_list[1:], self._subcommand_parsers[DEPLOY_SUBCOMMAND])
         deploy_parser.execute()
 
-    def onboard(self):
+    def _onboard(self):
         onboard_parser = OnboardParser(self._arg_list[1:], self._subcommand_parsers[ONBOARD_SUBCOMMAND])
         onboard_parser.execute()

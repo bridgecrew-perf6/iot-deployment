@@ -28,26 +28,26 @@ class Provisioner:
         location: str,
         logger: logging.Logger,
     ):
-        self.credential = credential
-        self.azure_subscription_id = azure_subscription_id
-        self.resource_group_name = resource_group_name
-        self.cosmosdb_name = cosmosdb_name
-        self.location = location
-        self.logger = logger
+        self._credential = credential
+        self._azure_subscription_id = azure_subscription_id
+        self._resource_group_name = resource_group_name
+        self._cosmosdb_name = cosmosdb_name
+        self._location = location
+        self._logger = logger
 
-        self.cosmosdb_client = CosmosDBManagementClient(self.credential, self.azure_subscription_id)
+        self._cosmosdb_client = CosmosDBManagementClient(self._credential, self._azure_subscription_id)
 
     def provision(self):
-        if self.cosmosdb_name not in {
+        if self._cosmosdb_name not in {
             desc_list_res.name
-            for desc_list_res in self.cosmosdb_client.database_accounts.list_by_resource_group(self.resource_group_name)
+            for desc_list_res in self._cosmosdb_client.database_accounts.list_by_resource_group(self._resource_group_name)
         }:
-            if self.cosmosdb_client.database_accounts.check_name_exists(self.cosmosdb_name):
-                self.logger.error(f"Cosmos DB name '{self.cosmosdb_name}' is not available")
+            if self._cosmosdb_client.database_accounts.check_name_exists(self._cosmosdb_name):
+                self._logger.error(f"Cosmos DB name '{self._cosmosdb_name}' is not available")
                 sys.exit(1)
             upd_params = DatabaseAccountCreateUpdateParameters(
-                locations=[Location(location_name=self.location, failover_priority=0)],
-                location=self.location,
+                locations=[Location(location_name=self._location, failover_priority=0)],
+                location=self._location,
                 kind="GlobalDocumentDB",
                 consistency_policy=ConsistencyPolicy(default_consistency_level="Session"),
                 is_virtual_network_filter_enabled=False,
@@ -62,27 +62,27 @@ class Provisioner:
                 network_acl_bypass="None",
                 network_acl_bypass_resource_ids=[],
             )
-            poller = self.cosmosdb_client.database_accounts.begin_create_or_update(
-                self.resource_group_name, self.cosmosdb_name, upd_params
+            poller = self._cosmosdb_client.database_accounts.begin_create_or_update(
+                self._resource_group_name, self._cosmosdb_name, upd_params
             )
             cosmosdb_res = poller.result()
-            self.logger.info(f"Provisioned Cosmos DB '{cosmosdb_res.name}'")
+            self._logger.info(f"Provisioned Cosmos DB '{cosmosdb_res.name}'")
         else:
-            self.logger.info(f"Cosmos DB '{self.cosmosdb_name}' is already provisioned")
+            self._logger.info(f"Cosmos DB '{self._cosmosdb_name}' is already provisioned")
 
         # Initialize the Cosmos DB with a database named "iot" and
         # 2 collections named "messages" and "latest_messages"
         self._initialize_db()
 
     def _initialize_db(self):
-        keys = self.cosmosdb_client.database_accounts.list_keys(self.resource_group_name, self.cosmosdb_name)
-        acc_res = self.cosmosdb_client.database_accounts.get(self.resource_group_name, self.cosmosdb_name)
+        keys = self._cosmosdb_client.database_accounts.list_keys(self._resource_group_name, self._cosmosdb_name)
+        acc_res = self._cosmosdb_client.database_accounts.get(self._resource_group_name, self._cosmosdb_name)
         cosmos_client = CosmosClient(acc_res.document_endpoint, keys.secondary_master_key)
         try:
             cosmos_client.create_database(COSMOSDB_DB_NAME, populate_query_metrics=True, offer_throughput=400)
-            self.logger.info(f"'{COSMOSDB_DB_NAME}' database is created in Cosmos DB")
+            self._logger.info(f"'{COSMOSDB_DB_NAME}' database is created in Cosmos DB")
         except CosmosResourceExistsError:
-            self.logger.info(f"Cosmos DB already has '{COSMOSDB_DB_NAME}' database")
+            self._logger.info(f"Cosmos DB already has '{COSMOSDB_DB_NAME}' database")
 
         db_proxy = cosmos_client.get_database_client(COSMOSDB_DB_NAME)
         for vendor_name in VENDOR_NAMES:
@@ -128,6 +128,6 @@ class Provisioner:
                 populate_query_metrics=populate_query_metrics,
                 unique_key_policy=unique_key_policy,
             )
-            self.logger.info("Collection '{}' is created in '{}' database".format(id, db_proxy.id))
+            self._logger.info("Collection '{}' is created in '{}' database".format(id, db_proxy.id))
         except CosmosResourceExistsError:
-            self.logger.info("Collection '{}' already exists in '{}' database".format(id, db_proxy.id))
+            self._logger.info("Collection '{}' already exists in '{}' database".format(id, db_proxy.id))
