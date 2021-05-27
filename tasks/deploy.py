@@ -1,6 +1,6 @@
 import argparse
 
-from services import event_hub, key_vault, service_bus
+from services import event_hub, key_vault, service_bus, signalr
 from utils import get_logger_and_credential
 
 from . import deploy_vanilla
@@ -37,6 +37,15 @@ def task_func(args: argparse.Namespace):
         args.resource_group_name,
         args.key_vault_name,
         args.tenant_id,
+        args.location,
+        logger,
+    )
+    # Step 12: Provision the SignalR.
+    signalr.provision(
+        credential,
+        args.azure_subscription_id,
+        args.resource_group_name,
+        args.signalr_name,
         args.location,
         logger,
     )

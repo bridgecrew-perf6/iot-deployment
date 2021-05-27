@@ -13,6 +13,7 @@ azure-common==1.1.27
     #   azure-mgmt-keyvault
     #   azure-mgmt-resource
     #   azure-mgmt-servicebus
+    #   azure-mgmt-signalr
     #   azure-mgmt-storage
     #   azure-mgmt-web
 azure-core==1.14.0
@@ -45,6 +46,8 @@ azure-mgmt-keyvault==9.0.0
 azure-mgmt-resource==18.0.0
     # via -r requirements.in
 azure-mgmt-servicebus==6.0.0
+    # via -r requirements.in
+azure-mgmt-signalr==0.4.0
     # via -r requirements.in
 azure-mgmt-storage==18.0.0
     # via -r requirements.in
@@ -90,11 +93,14 @@ msrest==0.6.21
     #   azure-mgmt-keyvault
     #   azure-mgmt-resource
     #   azure-mgmt-servicebus
+    #   azure-mgmt-signalr
     #   azure-mgmt-storage
     #   azure-mgmt-web
     #   msrestazure
 msrestazure==0.6.4
-    # via -r requirements.in
+    # via
+    #   -r requirements.in
+    #   azure-mgmt-signalr
 oauthlib==3.1.0
     # via requests-oauthlib
 portalocker==1.7.1

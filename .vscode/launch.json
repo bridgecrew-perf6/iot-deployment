@@ -43,6 +43,8 @@
                 "service-bus-namespace-materialfluss",
                 "--key-vault-name",
                 "key-vault-materialfluss",
+                "--signalr-name",
+                "signalr-materialfluss",
                 "--location",
                 "West Europe",
                 "--verbose",

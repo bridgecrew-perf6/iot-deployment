@@ -3,7 +3,7 @@ import sys
 
 from azure.identity import AzureCliCredential
 from azure.mgmt.eventhub import EventHubManagementClient
-from azure.mgmt.eventhub.models import CheckNameAvailabilityParameter, EHNamespace, Eventhub, Sku
+from azure.mgmt.eventhub.models import CheckNameAvailabilityParameter, EHNamespace, Eventhub, NetworkRuleSet, Sku
 
 EVENT_HUB_MGMT_API_VER = "2017-04-01"
 
@@ -53,6 +53,10 @@ class Provisioner:
                 self._resource_group_name, self._event_hub_namespace, eh_namespace
             )
             eh_res = poller.result()
+            net_ruleset = NetworkRuleSet(default_action="Allow")
+            self._event_hub_client.namespaces.create_or_update_network_rule_set(
+                self._resource_group_name, self._event_hub_namespace, net_ruleset
+            )
             self._logger.info(f"Provisioned EventHub namespace '{eh_res.name}'")
         else:
             self._logger.info(f"EventHub namespace '{self._event_hub_namespace}' is already provisioned")

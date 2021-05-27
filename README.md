@@ -44,20 +44,21 @@ The following steps of Azure service provisioning are executed by the deployment
 
 ### `deploy` subcommand usage:
     usage: main.py deploy [-h] --azure-subscription-id AZURE_SUBSCRIPTION_ID
-                          --vendor-credentials-path VENDOR_CREDENTIALS_PATH 
+                          --vendor-credentials-path VENDOR_CREDENTIALS_PATH
                           --tenant-id TENANT_ID
-                          [--resource-group-name RESOURCE_GROUP_NAME]       
+                          [--resource-group-name RESOURCE_GROUP_NAME]
                           [--iot-hub-name IOT_HUB_NAME]
-                          [--device-ids-file-path DEVICE_IDS_FILE_PATH]     
+                          [--device-ids-file-path DEVICE_IDS_FILE_PATH]
                           [--cosmosdb-name COSMOSDB_NAME]
                           [--app-srv-plan-name APP_SRV_PLAN_NAME]
                           [--storage-acc-name STORAGE_ACC_NAME]
                           [--functions-name FUNCTIONS_NAME]
-                          [--functions-code-path FUNCTIONS_CODE_PATH]       
-                          [--event-hub-namespace EVENT_HUB_NAMESPACE]       
+                          [--functions-code-path FUNCTIONS_CODE_PATH]
+                          [--event-hub-namespace EVENT_HUB_NAMESPACE]
                           [--event-hub-name EVENT_HUB_NAME]
                           [--service-bus-namespace SERVICE_BUS_NAMESPACE]
-                          [--key-vault-name KEY_VAULT_NAME] [--location LOCATION]
+                          [--key-vault-name KEY_VAULT_NAME]
+                          [--signalr-name SIGNALR_NAME] [--location LOCATION]
                           [--logging-level {DEBUG,INFO,WARNING,ERROR,CRITICAL}]
                           [--verbose]
                           {vanilla} ...
@@ -102,6 +103,8 @@ The following steps of Azure service provisioning are executed by the deployment
                             Name of the ServiceBus for the deployment.
       --key-vault-name KEY_VAULT_NAME
                             Name of the Key Vault for the deployment.
+      --signalr-name SIGNALR_NAME
+                            Name of the SignalR for the deployment.
       --location LOCATION   Location of the Azure datacenter for the deployment.
       --logging-level {DEBUG,INFO,WARNING,ERROR,CRITICAL}
                             Logging level of the program.

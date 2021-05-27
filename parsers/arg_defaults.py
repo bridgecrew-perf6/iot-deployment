@@ -13,4 +13,5 @@ DEFAULT_EVENT_HUB_NAMESPACE = f"event-hub-namespace-materialfluss{COMMON_RANDOM_
 DEFAULT_EVENT_HUB_NAME = f"event-hub-materialfluss{COMMON_RANDOM_POSTFIX}"
 DEFAULT_SERVICE_BUS_NAMESPACE = f"service-bus-namespace-materialfluss{COMMON_RANDOM_POSTFIX}"
 DEFAULT_KEY_VAULT_NAME = f"key-vault-materialfluss{COMMON_RANDOM_POSTFIX}"
+DEFAULT_SIGNALR_NAME = f"signalr-materialfluss{COMMON_RANDOM_POSTFIX}"
 DEFAULT_LOCATION = "North Europe"

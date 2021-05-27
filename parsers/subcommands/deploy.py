@@ -12,6 +12,7 @@ from parsers.arg_defaults import (
     DEFAULT_LOCATION,
     DEFAULT_RESOURCE_GROUP_NAME,
     DEFAULT_SERVICE_BUS_NAMESPACE,
+    DEFAULT_SIGNALR_NAME,
     DEFAULT_STORAGE_ACC_NAME,
 )
 from parsers.base import BaseParser
@@ -140,6 +141,9 @@ class NoSubcommandParser(BaseParser):
         )
         self._parser.add_argument(
             "--key-vault-name", type=str, default=DEFAULT_KEY_VAULT_NAME, help="Name of the Key Vault for the deployment."
+        )
+        self._parser.add_argument(
+            "--signalr-name", type=str, default=DEFAULT_SIGNALR_NAME, help="Name of the SignalR for the deployment."
         )
         self._parser.add_argument(
             "--location",
