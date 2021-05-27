@@ -37,6 +37,8 @@
                 "event-hub-namespace-materialfluss",
                 "--event-hub-name",
                 "event-hub-materialfluss",
+                "--service-bus-namespace",
+                "service-bus-namespace-materialfluss",
                 "--location",
                 "West Europe",
                 "--verbose",

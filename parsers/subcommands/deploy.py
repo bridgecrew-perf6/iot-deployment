@@ -10,6 +10,7 @@ from parsers.arg_defaults import (
     DEFAULT_IOT_HUB_NAME,
     DEFAULT_LOCATION,
     DEFAULT_RESOURCE_GROUP_NAME,
+    DEFAULT_SERVICE_BUS_NAMESPACE,
     DEFAULT_STORAGE_ACC_NAME,
 )
 from parsers.base import BaseParser
@@ -110,25 +111,31 @@ class NoSubcommandParser(BaseParser):
             "--functions-code-path",
             type=str,
             default="",
-            help="Path to the folder containing Azure Functions source code." " Be warned that '.git' folder will be erased!",
+            help="Path to the folder containing Azure Functions source code. Be warned that '.git' folder will be erased!",
         )
         self._parser.add_argument(
             "--event-hub-namespace",
             type=str,
             default=DEFAULT_EVENT_HUB_NAMESPACE,
-            help="Name of the EventHub namespace to deploy.",
+            help="Name of the EventHub namespace for the deployment.",
         )
         self._parser.add_argument(
             "--event-hub-name",
             type=str,
             default=DEFAULT_EVENT_HUB_NAME,
-            help="Name of the EventHub to deploy inside the EventHub namespace.",
+            help="Name of the EventHub to provision inside the EventHub namespace.",
+        )
+        self._parser.add_argument(
+            "--service-bus-namespace",
+            type=str,
+            default=DEFAULT_SERVICE_BUS_NAMESPACE,
+            help="Name of the ServiceBus for the deployment.",
         )
         self._parser.add_argument(
             "--location",
             type=str,
             default=DEFAULT_LOCATION,
-            help="Location of the Azure datacenter to deploy.",
+            help="Location of the Azure datacenter for the deployment.",
         )
 
     def execute(self):

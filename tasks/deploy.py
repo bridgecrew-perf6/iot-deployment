@@ -1,6 +1,6 @@
 import argparse
 
-from services import event_hub
+from services import event_hub, service_bus
 from utils import get_logger_and_credential
 
 from . import deploy_vanilla
@@ -21,3 +21,12 @@ def task_func(args: argparse.Namespace):
         args.location,
         logger,
     ).provision()
+    # Step 10: Provision the ServiceBus namespace.
+    service_bus.provision(
+        credential,
+        args.azure_subscription_id,
+        args.resource_group_name,
+        args.service_bus_namespace,
+        args.location,
+        logger,
+    )

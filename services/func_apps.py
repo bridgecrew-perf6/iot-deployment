@@ -75,7 +75,7 @@ class Provisioner:
         self._repo_deploy()
         # Cleanup afterwards
         self._cleanup()
-        self._logger.info("Initialized Azure function apps")
+        self._logger.info("Deployed Azure function apps")
 
     def _code_to_copy(self, org_func_app_name: str, postfix: Optional[str] = None) -> str:
         func_app_name = org_func_app_name if postfix is None else "{}_{}".format(org_func_app_name, postfix)

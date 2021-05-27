@@ -13,7 +13,7 @@ from azure.mgmt.web.models import IpSecurityRestriction, Site, SiteConfig
 
 from services import app_srv_plan, iot_hub, storage
 
-STORAGE_CONN_STR_TEMPLATE = "DefaultEndpointsProtocol=https;" "AccountName={};AccountKey={};EndpointSuffix=core.windows.net"
+STORAGE_CONN_STR_TEMPLATE = "DefaultEndpointsProtocol=https;AccountName={};AccountKey={};EndpointSuffix=core.windows.net"
 COSMOSDB_CONN_STR_POSTFIX = "_DOCUMENTDB"
 IOT_HUB_CONN_STR_POSTFIX = "_events_IOTHUB"
 COSMOSDB_CONN_STR_TEMPLATE = "AccountEndpoint={};AccountKey={};"

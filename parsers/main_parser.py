@@ -12,7 +12,7 @@ ONBOARD_SUBCOMMAND = "onboard"
 class MainParser(SubcommandParser):
     def __init__(self):
         subcommands = {
-            DEPLOY_SUBCOMMAND: SubcommandInfo(self._deploy, {}, "Subcommand to deploy the Azure infrastructure."),
+            DEPLOY_SUBCOMMAND: SubcommandInfo(self._deploy, {}, "Subcommand to provision the Azure infrastructure."),
             ONBOARD_SUBCOMMAND: SubcommandInfo(
                 self._onboard, {}, "Subcommand for batch device onboarding into the Azure IotHub."
             ),

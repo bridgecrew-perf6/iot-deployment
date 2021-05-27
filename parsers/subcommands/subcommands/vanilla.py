@@ -80,13 +80,13 @@ class VanillaParser(BaseParser):
             "--functions-code-path",
             type=str,
             default="",
-            help="Path to the folder containing Azure Functions source code." " Be warned that '.git' folder will be erased!",
+            help="Path to the folder containing Azure Functions source code. Be warned that '.git' folder will be erased!",
         )
         self._parser.add_argument(
             "--location",
             type=str,
             default=DEFAULT_LOCATION,
-            help="Location of the Azure datacenter to deploy.",
+            help="Location of the Azure datacenter for the deployment.",
         )
 
     def execute(self):

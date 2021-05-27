@@ -5,6 +5,7 @@ azure-iot-hub
 azure-mgmt-cosmosdb
 azure-mgmt-iothub
 azure-mgmt-resource
+azure-mgmt-servicebus
 azure-mgmt-storage
 azure-mgmt-web
 msrest
