@@ -31,19 +31,30 @@ The following steps of Azure service deployment are executed by the deployment s
 * Install **Azure CLI** from https://docs.microsoft.com/en-us/cli/azure/install-azure-cli .
 
 ## **Usage:**
+    usage: main.py [-h] {deploy,onboard} ...
 
-    usage: main.py [-h] [--resource-group-name RESOURCE_GROUP_NAME]
-                [--iot-hub-name IOT_HUB_NAME]
-                [--device-ids-file-path DEVICE_IDS_FILE_PATH]   
-                [--cosmosdb-name COSMOSDB_NAME]
-                [--app-srv-plan-name APP_SRV_PLAN_NAME]
-                [--storage-acc-name STORAGE_ACC_NAME]
-                [--functions-name FUNCTIONS_NAME]
-                [--functions-code-path FUNCTIONS_CODE_PATH]
-                [--location LOCATION]
-                [--logging-level {DEBUG,INFO,WARNING,ERROR,CRITICAL}]
-                [--verbose]
-                azure_subscription_id vendor_credentials_path
+    positional arguments:
+    {deploy,onboard}
+        deploy          Subcommand to deploy the Azure infrastructure.       
+        onboard         Subcommand for batch device onboarding into the Azure
+                        IotHub.
+
+    optional arguments:
+    -h, --help        show this help message and exit
+
+### `deploy` subcommand usage:
+    usage: main.py deploy [-h] [--resource-group-name RESOURCE_GROUP_NAME]
+                        [--iot-hub-name IOT_HUB_NAME]
+                        [--device-ids-file-path DEVICE_IDS_FILE_PATH]
+                        [--cosmosdb-name COSMOSDB_NAME]
+                        [--app-srv-plan-name APP_SRV_PLAN_NAME]
+                        [--storage-acc-name STORAGE_ACC_NAME]
+                        [--functions-name FUNCTIONS_NAME]
+                        [--functions-code-path FUNCTIONS_CODE_PATH]
+                        [--location LOCATION]
+                        [--logging-level {DEBUG,INFO,WARNING,ERROR,CRITICAL}]
+                        [--verbose]
+                        azure_subscription_id vendor_credentials_path
 
     positional arguments:
     azure_subscription_id
@@ -60,12 +71,12 @@ The following steps of Azure service deployment are executed by the deployment s
     --resource-group-name RESOURCE_GROUP_NAME
                             Resource group name for the deployment.
     --iot-hub-name IOT_HUB_NAME
-                            IotHub name for deployment.
+                            IotHub name for the deployment.
     --device-ids-file-path DEVICE_IDS_FILE_PATH
                             Path of the text file containing 1 device id per line
                             to be registered in IotHub.
     --cosmosdb-name COSMOSDB_NAME
-                            CosmosDB name for the deployment.
+                            Cosmos DB name for the deployment.
     --app-srv-plan-name APP_SRV_PLAN_NAME
                             App Service Plan name for the deployment.
     --storage-acc-name STORAGE_ACC_NAME
@@ -79,3 +90,19 @@ The following steps of Azure service deployment are executed by the deployment s
     --logging-level {DEBUG,INFO,WARNING,ERROR,CRITICAL}
                             Logging level of the program.
     --verbose, -v         The flag for whether there should be logging messages.
+
+### `onboard` subcommand usage:
+    usage: main.py onboard [-h]
+                        azure_subscription_id resource_group_name iot_hub_name
+                        device_ids_file_path
+
+    positional arguments:
+    azure_subscription_id
+                            Azure subscription ID.
+    resource_group_name   Resource group name for the device onboarding.
+    iot_hub_name          IotHub name for the device onboarding.
+    device_ids_file_path  Path of the text file containing 1 device id per line
+                            to be registered in IotHub.
+
+    optional arguments:
+    -h, --help            show this help message and exit
