@@ -24,7 +24,7 @@ def provision(
             logger.error(f"ServiceBus namespace '{service_bus_namespace}' is not available")
             sys.exit(1)
         # https://docs.microsoft.com/en-us/python/api/azure-mgmt-servicebus/azure.mgmt.servicebus.operations.namespacesoperations?view=azure-python#begin-create-or-update-resource-group-name--namespace-name--parameters----kwargs-
-        sb_namespace_sku = SBSku(name="Basic", tier="Basic")
+        sb_namespace_sku = SBSku(name="Standard", tier="Standard")
         sb_parameters = SBNamespace(location=location, sku=sb_namespace_sku, zone_redundant=False)
         poller = service_bus_client.namespaces.begin_create_or_update(
             resource_group_name, service_bus_namespace, sb_parameters
