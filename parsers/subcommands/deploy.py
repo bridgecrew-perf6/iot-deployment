@@ -17,11 +17,13 @@ from parsers.arg_defaults import (
     DEFAULT_STORAGE_ACC_NAME,
 )
 from parsers.base import BaseParser
+from parsers.subcommands.subcommands.iiot import IiotParser
 from parsers.subparser import SubcommandInfo, SubcommandParser
 from tasks import deploy
 
 from .subcommands.vanilla import VanillaParser
 
+IIOT_SUBCOMMAND = "iiot"
 VANILLA_SUBCOMMAND = "vanilla"
 
 
@@ -32,12 +34,22 @@ class DeployParser(SubcommandParser):
         parser: Optional[argparse.ArgumentParser],
     ):
         subcommands = {
+            IIOT_SUBCOMMAND: SubcommandInfo(
+                self._iiot,
+                {},
+                "Subcommand to register and deploy only Azure IIoT cloud modules into an existing kubernetes cluster "
+                "(uses 'deploy-iiot.ps1').",
+            ),
             VANILLA_SUBCOMMAND: SubcommandInfo(
                 self._vanilla, {}, "Subcommand to deploy vanilla Azure infrastructure (without OPC UA integration)."
             ),
         }
         no_subcommand_case = SubcommandInfo(self._full_deployment, {}, None)
         super().__init__(subcommands, no_subcommand_case=no_subcommand_case, arg_list=arg_list, parser=parser)
+
+    def _iiot(self):
+        iiot_parser = IiotParser(self._arg_list[1:], self._subcommand_parsers[IIOT_SUBCOMMAND])
+        iiot_parser.execute()
 
     def _vanilla(self):
         vanilla_parser = VanillaParser(self._arg_list[1:], self._subcommand_parsers[VANILLA_SUBCOMMAND])
@@ -73,26 +85,6 @@ class NoSubcommandParser(BaseParser):
             type=str,
             required=True,
             help="The Azure Active Directory tenant ID that should be used for authenticating requests to the key vault.",
-        )
-        self._parser.add_argument(
-            "--iiot-repo-path",
-            type=str,
-            required=True,
-            help="Path to the Git repository of Azure IIoT. You can clone it from https://github.com/Azure/Industrial-IoT.",
-        )
-        self._parser.add_argument(
-            "--aad-reg-path",
-            type=str,
-            required=True,
-            help="Path to the '.json' file to be created during the registration of Azure IIoT modules in AAD. "
-            "This file will also be used to deploy the modules into 'kubectl' kubernetes cluster.",
-        )
-        self._parser.add_argument(
-            "--helm-values-yaml-path",
-            type=str,
-            required=True,
-            help="Path to the 'values.yaml' to be created and to be used by Helm "
-            "during the deployment of Azure IIoT cloud modules.",
         )
         self._parser.add_argument(
             "--resource-group-name",
@@ -172,6 +164,26 @@ class NoSubcommandParser(BaseParser):
             default=DEFAULT_IIOT_APP_NAME,
             help="Name of the Azure IIoT app to be registered in AAD, "
             "as '<app_name>-client', '<app_name>-web' and '<app_name>-service'.",
+        )
+        self._parser.add_argument(
+            "--iiot-repo-path",
+            type=str,
+            help="Path to the Git repository of Azure IIoT. You can clone it from https://github.com/Azure/Industrial-IoT. "
+            "If not given, then Azure IIoT modules will not be deployed. But the required services will be deployed.",
+        )
+        self._parser.add_argument(
+            "--aad-reg-path",
+            type=str,
+            help="Path to the '.json' file to be created during the registration of Azure IIoT modules in AAD. "
+            "This file will also be used to deploy the modules into 'kubectl' kubernetes cluster. "
+            "If not given, then Azure IIoT modules will not be deployed. But the required services will be deployed.",
+        )
+        self._parser.add_argument(
+            "--helm-values-yaml-path",
+            type=str,
+            help="Path to the 'values.yaml' to be created and to be used by Helm "
+            "during the deployment of Azure IIoT cloud modules. "
+            "If not given, then Azure IIoT modules will not be deployed. But the required services will be deployed.",
         )
         self._parser.add_argument(
             "--location",
