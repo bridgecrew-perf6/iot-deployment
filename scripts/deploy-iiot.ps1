@@ -56,11 +56,14 @@ Write-Output $kv_uri
 $sr_connstr = az signalr key list --name $SignalRName --resource-group $RGName --query "secondaryConnectionString"
 Write-Output $sr_connstr
 
-$aad_register_script_path = Join-Path -Path $IIoTRepoPath -ChildPath "deploy" -AdditionalChildPath "scripts", "aad-register.ps1"
-$params = '-Name "' + $IIoTAppName.ToString() + '" -TenantId ' + $tenant_id.ToString() + ' -Output "' + $AadRegPath.ToString() + '"'
-Invoke-Expression -Command "$aad_register_script_path $params"
+if (![System.IO.File]::Exists($AadRegPath)) {
+    $aad_register_script_path = [IO.Path]::Combine($IIoTRepoPath, "deploy", "scripts", "aad-register.ps1")
+    $params = '-Name "' + $IIoTAppName.ToString() + '" -TenantId ' + $tenant_id.ToString() + ' -Output "' + $AadRegPath.ToString() + '"'
+    Invoke-Expression -Command "$aad_register_script_path $params"   
+}
 
 helm repo add azure-iiot https://azureiiot.blob.core.windows.net/helm
+helm repo update
 kubectl create namespace azure-iiot-ns
 $aad_json = Get-Content -Raw -Path $AadRegPath | ConvertFrom-Json
 $helm_values_dict = @{

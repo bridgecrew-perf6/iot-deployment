@@ -7,7 +7,7 @@ import sys
 def task_func(args: argparse.Namespace):
     # Step 13: Register the Azure IIoT modules to Azure AAD and deploy
     # the cloud modules into the 'kubectl' kubernetes cluster.
-    if any(arg in None for arg in [args.iiot_repo_path, args.aad_reg_path, args.helm_values_yaml_path]):
+    if any(arg is None for arg in [args.iiot_repo_path, args.aad_reg_path, args.helm_values_yaml_path]):
         return
     p = subprocess.Popen(
         [
