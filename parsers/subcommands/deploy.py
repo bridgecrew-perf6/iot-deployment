@@ -7,6 +7,7 @@ from parsers.arg_defaults import (
     DEFAULT_EVENT_HUB_NAME,
     DEFAULT_EVENT_HUB_NAMESPACE,
     DEFAULT_FUNCTIONS_NAME,
+    DEFAULT_IIOT_APP_NAME,
     DEFAULT_IOT_HUB_NAME,
     DEFAULT_KEY_VAULT_NAME,
     DEFAULT_LOCATION,
@@ -72,6 +73,26 @@ class NoSubcommandParser(BaseParser):
             type=str,
             required=True,
             help="The Azure Active Directory tenant ID that should be used for authenticating requests to the key vault.",
+        )
+        self._parser.add_argument(
+            "--iiot-repo-path",
+            type=str,
+            required=True,
+            help="Path to the Git repository of Azure IIoT. You can clone it from https://github.com/Azure/Industrial-IoT.",
+        )
+        self._parser.add_argument(
+            "--aad-reg-path",
+            type=str,
+            required=True,
+            help="Path to the '.json' file to be created during the registration of Azure IIoT modules in AAD. "
+            "This file will also be used to deploy the modules into 'kubectl' kubernetes cluster.",
+        )
+        self._parser.add_argument(
+            "--helm-values-yaml-path",
+            type=str,
+            required=True,
+            help="Path to the 'values.yaml' to be created and to be used by Helm "
+            "during the deployment of Azure IIoT cloud modules.",
         )
         self._parser.add_argument(
             "--resource-group-name",
@@ -144,6 +165,13 @@ class NoSubcommandParser(BaseParser):
         )
         self._parser.add_argument(
             "--signalr-name", type=str, default=DEFAULT_SIGNALR_NAME, help="Name of the SignalR for the deployment."
+        )
+        self._parser.add_argument(
+            "--iiot-app-name",
+            type=str,
+            default=DEFAULT_IIOT_APP_NAME,
+            help="Name of the Azure IIoT app to be registered in AAD, "
+            "as '<app_name>-client', '<app_name>-web' and '<app_name>-service'.",
         )
         self._parser.add_argument(
             "--location",

@@ -1,4 +1,7 @@
 import argparse
+import os
+import subprocess
+import sys
 
 from services import event_hub, key_vault, service_bus, signalr
 from utils import get_logger_and_credential
@@ -49,3 +52,40 @@ def task_func(args: argparse.Namespace):
         args.location,
         logger,
     )
+    # Step 13: Register the Azure IIoT modules to Azure AAD and deploy
+    # the cloud modules into the 'kubectl' kubernetes cluster.
+    p = subprocess.Popen(
+        [
+            "powershell",
+            os.path.join(".", "scripts", "deploy-iiot.ps1"),
+            "-RGName",
+            args.resource_group_name,
+            "-IotHubName",
+            args.iot_hub_name,
+            "-CosmosDBName",
+            args.cosmosdb_name,
+            "-StorageAccName",
+            args.storage_acc_name,
+            "-EvHubNamespace",
+            args.event_hub_namespace,
+            "-EvHubName",
+            args.event_hub_name,
+            "-SerBusNamespace",
+            args.service_bus_namespace,
+            "-KeyVaultName",
+            args.key_vault_name,
+            "-SignalRName",
+            args.signalr_name,
+            "-IIoTAppName",
+            args.iiot_app_name,
+            "-IIoTRepoPath",
+            args.iiot_repo_path,
+            "-AadRegPath",
+            args.aad_reg_path,
+            "-ValuesYamlPath",
+            args.helm_values_yaml_path,
+        ],
+        stdout=sys.stdout,
+        stderr=sys.stderr,
+    )
+    p.communicate()

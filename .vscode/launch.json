@@ -5,7 +5,22 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python: Current File",
+            "name": "PowerShell: Deploy Azure IIoT",
+            "type": "PowerShell",
+            "request": "launch",
+            "script": "${workspaceFolder}/scripts/deploy-iiot.ps1",
+            "cwd": "${workspaceFolder}",
+            "args": [
+                "-IIoTRepoPath",
+                "D:\\Users\\deniz\\Desktop\\masters\\COURSES\\SS2021\\IDP\\IoT\\development\\repos\\Industrial-IoT",
+                "-AadRegPath",
+                "D:\\Users\\deniz\\Desktop\\masters\\COURSES\\SS2021\\IDP\\IoT\\development\\Azure\\IIoT\\aad.json",
+                "-ValuesYamlPath",
+                "D:\\Users\\deniz\\Desktop\\masters\\COURSES\\SS2021\\IDP\\IoT\\development\\Azure\\IIoT\\values.yaml",
+            ]
+        },
+        {
+            "name": "Python: Full Deployment",
             "type": "python",
             "request": "launch",
             "program": "main.py",
@@ -45,6 +60,14 @@
                 "key-vault-materialfluss",
                 "--signalr-name",
                 "signalr-materialfluss",
+                "--iiot-app-name",
+                "azure-iiot-materialfluss",
+                "--iiot-repo-path",
+                "D:\\Users\\deniz\\Desktop\\masters\\COURSES\\SS2021\\IDP\\IoT\\development\\repos\\Industrial-IoT",
+                "--aad-reg-path",
+                "D:\\Users\\deniz\\Desktop\\masters\\COURSES\\SS2021\\IDP\\IoT\\development\\Azure\\IIoT\\aad.json",
+                "--values-yaml-path",
+                "D:\\Users\\deniz\\Desktop\\masters\\COURSES\\SS2021\\IDP\\IoT\\development\\Azure\\IIoT\\values.yaml",
                 "--location",
                 "West Europe",
                 "--verbose",
