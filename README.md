@@ -25,10 +25,14 @@ The following steps of Azure service provisioning are executed by the deployment
 * The subscription chosen in the terminal **must be the same** as the one provided as a command line argument to the deployment script.
 
 ## **Installing Dependencies:**
-* Install Python3 either system-wide, user-wide or as a virtual environment,
-* Run `pip install pip-tools` command via the `pip` command associated with the installed Python,
+* Install Python3 either system-wide, user-wide or as a virtual environment.
+* Run `pip install pip-tools` command via the `pip` command associated with the installed Python.
 * Run `pip-sync` inside the project root folder.
 * Install **Azure CLI** from https://docs.microsoft.com/en-us/cli/azure/install-azure-cli .
+* If you want to deploy **OPC UA integration** as well, then:
+  * Run `az extension add --name azure-iot` from any terminal.
+  * Run `Install-Module powershell-yaml` in PowerShell.
+  * Install and set up `kubectl` and `helm`. Also make sure they are **accessible from the PowerShell**.
 
 ## **Usage:**
     usage: main.py [-h] {deploy,onboard} ...
