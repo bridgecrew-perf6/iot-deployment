@@ -10,6 +10,19 @@ The following steps of Azure service provisioning are executed by the deployment
 7. Provision **Azure Functions** inside the ASP (app service plan),
 8. Deploy the Azure **function apps**.
 
+If also the OPC UA integration is deployed, then:
+
+9. Provision the **EventHub namespace** and **EventHub** inside it,
+10. Provision the **ServiceBus namespace**,
+11. Provision the **Key Vault**,
+12. Provision the **SignalR**,
+
+If also Azure IIoT cloud modules are to be deployed into an existing K8s cluster, then:
+
+1.  **Register** the Azure IIoT modules to Azure AAD and **deploy** the cloud modules into the `kubectl` kubernetes cluster.
+
+***
+
 * **Requires executing the following commands in any terminal** (check [installing dependencies](#installing-dependencies)):
   1. `az login` to login,
   2. `az account list -o table` to see subscriptions,
