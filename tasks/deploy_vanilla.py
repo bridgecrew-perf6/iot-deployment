@@ -1,7 +1,9 @@
 import argparse
 
-from services import app_srv_plan, cosmosdb, func_apps, functions, iot_devices, iot_hub, resource_group, storage
+from services import app_srv_plan, cosmosdb, func_apps, functions, iot_hub, resource_group, storage
 from utils import get_logger_and_credential
+
+from . import onboard
 
 
 def task_func(args: argparse.Namespace):
@@ -26,15 +28,7 @@ def task_func(args: argparse.Namespace):
         logger,
     )
 
-    # Step 3: Onboard & provision default IoT devices.
-    iot_devices.provision(
-        credential,
-        args.azure_subscription_id,
-        args.resource_group_name,
-        args.iot_hub_name,
-        args.device_ids_file_path,
-        logger,
-    )
+    onboard.task_func(args)
 
     # Step 4: Provision the Cosmos DB and initialize it.
     cosmosdb.Provisioner(

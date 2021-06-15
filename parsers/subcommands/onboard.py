@@ -1,8 +1,50 @@
 import argparse
-from typing import List, Optional
+from collections import OrderedDict
+from typing import Any, Dict, List, Optional
 
 from parsers.base import BaseParser
 from tasks import onboard
+
+
+def get_arg_dictionary() -> Dict[str, Dict[str, Any]]:
+    # Do not use positional arguments, to prevent possible collision with subcommand names!
+    arg_dict = OrderedDict(
+        [
+            (
+                "--azure-subscription-id",
+                {
+                    "type": str,
+                    "required": True,
+                    "help": "Azure subscription ID.",
+                },
+            ),
+            (
+                "--resource-group-name",
+                {
+                    "type": str,
+                    "required": True,
+                    "help": "Resource group name for the device onboarding.",
+                },
+            ),
+            (
+                "--iot-hub-name",
+                {
+                    "type": str,
+                    "required": True,
+                    "help": "IotHub name for the device onboarding.",
+                },
+            ),
+            (
+                "--device-ids-file-path",
+                {
+                    "type": str,
+                    "required": True,
+                    "help": "Path of the text file containing 1 device id per line to be registered in IotHub.",
+                },
+            ),
+        ]
+    )
+    return arg_dict
 
 
 class OnboardParser(BaseParser):
@@ -14,26 +56,9 @@ class OnboardParser(BaseParser):
         super().__init__(arg_list=arg_list, parser=parser)
 
     def _add_arguments(self):
-        # Do not use positional arguments, to prevent possible collision with subcommand names!
-        self._parser.add_argument("--azure-subscription-id", type=str, required=True, help="Azure subscription ID.")
-        self._parser.add_argument(
-            "--resource-group-name",
-            type=str,
-            required=True,
-            help="Resource group name for the device onboarding.",
-        )
-        self._parser.add_argument(
-            "--iot-hub-name",
-            type=str,
-            required=True,
-            help="IotHub name for the device onboarding.",
-        )
-        self._parser.add_argument(
-            "--device-ids-file-path",
-            type=str,
-            required=True,
-            help="Path of the text file containing 1 device id per line to be registered in IotHub.",
-        )
+        arg_dict = get_arg_dictionary()
+        for arg, config in arg_dict.items():
+            self._parser.add_argument(arg, **config)
 
     def execute(self):
         args = self._parser.parse_args(self._arg_list)

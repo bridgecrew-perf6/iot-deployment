@@ -9,7 +9,6 @@ from . import deploy_iiot, deploy_vanilla
 def task_func(args: argparse.Namespace):
     deploy_vanilla.task_func(args)
 
-    # TODO: deploy OPC UA integration part.
     logger, credential = get_logger_and_credential(args)
     # Step 9: Provision the EventHub namespace and EventHub inside it.
     event_hub.Provisioner(

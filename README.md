@@ -61,16 +61,16 @@ If also Azure IIoT cloud modules are to be deployed into an existing K8s cluster
 
 ### `deploy` subcommand usage:
     usage: main.py deploy [-h] --azure-subscription-id AZURE_SUBSCRIPTION_ID
-                          --vendor-credentials-path VENDOR_CREDENTIALS_PATH 
-                          --tenant-id TENANT_ID
                           [--resource-group-name RESOURCE_GROUP_NAME]       
                           [--iot-hub-name IOT_HUB_NAME]
                           [--device-ids-file-path DEVICE_IDS_FILE_PATH]     
+                          --vendor-credentials-path VENDOR_CREDENTIALS_PATH 
                           [--cosmosdb-name COSMOSDB_NAME]
                           [--app-srv-plan-name APP_SRV_PLAN_NAME]
                           [--storage-acc-name STORAGE_ACC_NAME]
                           [--functions-name FUNCTIONS_NAME]
                           [--functions-code-path FUNCTIONS_CODE_PATH]       
+                          [--location LOCATION]
                           [--event-hub-namespace EVENT_HUB_NAMESPACE]       
                           [--event-hub-name EVENT_HUB_NAME]
                           [--service-bus-namespace SERVICE_BUS_NAMESPACE]   
@@ -80,7 +80,7 @@ If also Azure IIoT cloud modules are to be deployed into an existing K8s cluster
                           [--iiot-repo-path IIOT_REPO_PATH]
                           [--aad-reg-path AAD_REG_PATH]
                           [--helm-values-yaml-path HELM_VALUES_YAML_PATH]
-                          [--location LOCATION]
+                          --tenant-id TENANT_ID
                           [--logging-level {DEBUG,INFO,WARNING,ERROR,CRITICAL}]
                           [--verbose]
                           {iiot,vanilla} ...
@@ -89,15 +89,6 @@ If also Azure IIoT cloud modules are to be deployed into an existing K8s cluster
       -h, --help            show this help message and exit
       --azure-subscription-id AZURE_SUBSCRIPTION_ID
                             Azure subscription ID.
-      --vendor-credentials-path VENDOR_CREDENTIALS_PATH
-                            Path to a JSON file containing credentials for each
-                            device vendor server. The JSON object must be of the
-                            following format: {"vendor1": {"endpoint_uri1":
-                            {"x-api-key": API_KEY}, "endpoint_uri2": {"username":
-                            USERNAME, "password": PASSWORD}}, ...}
-      --tenant-id TENANT_ID
-                            The Azure Active Directory tenant ID that should be
-                            used for authenticating requests to the key vault.
       --resource-group-name RESOURCE_GROUP_NAME
                             Resource group name for the deployment.
       --iot-hub-name IOT_HUB_NAME
@@ -105,6 +96,12 @@ If also Azure IIoT cloud modules are to be deployed into an existing K8s cluster
       --device-ids-file-path DEVICE_IDS_FILE_PATH
                             Path of the text file containing 1 device id per line
                             to be registered in IotHub.
+      --vendor-credentials-path VENDOR_CREDENTIALS_PATH
+                            Path to a JSON file containing credentials for each
+                            device vendor server. The JSON object must be of the
+                            following format: {"vendor1": {"endpoint_uri1":
+                            {"x-api-key": API_KEY}, "endpoint_uri2": {"username":
+                            USERNAME, "password": PASSWORD}}, ...}
       --cosmosdb-name COSMOSDB_NAME
                             Cosmos DB name for the deployment.
       --app-srv-plan-name APP_SRV_PLAN_NAME
@@ -116,6 +113,7 @@ If also Azure IIoT cloud modules are to be deployed into an existing K8s cluster
       --functions-code-path FUNCTIONS_CODE_PATH
                             Path to the folder containing Azure Functions source
                             code. Be warned that '.git' folder will be erased!
+      --location LOCATION   Location of the Azure datacenter for the deployment.
       --event-hub-namespace EVENT_HUB_NAMESPACE
                             Name of the EventHub namespace for the deployment.
       --event-hub-name EVENT_HUB_NAME
@@ -149,7 +147,9 @@ If also Azure IIoT cloud modules are to be deployed into an existing K8s cluster
                             modules. If not given, then Azure IIoT modules will
                             not be deployed. But the required services will be
                             deployed.
-      --location LOCATION   Location of the Azure datacenter for the deployment.
+      --tenant-id TENANT_ID
+                            The Azure Active Directory tenant ID that should be
+                            used for authenticating requests to the key vault.
       --logging-level {DEBUG,INFO,WARNING,ERROR,CRITICAL}
                             Logging level of the program.
       --verbose, -v         The flag for whether there should be logging messages.
@@ -223,11 +223,12 @@ If also Azure IIoT cloud modules are to be deployed into an existing K8s cluster
 
 #### `deploy vanilla` subcommand usage:
     usage: main.py deploy vanilla [-h] --azure-subscription-id
-                                  AZURE_SUBSCRIPTION_ID --vendor-credentials-path
-                                  VENDOR_CREDENTIALS_PATH
+                                  AZURE_SUBSCRIPTION_ID
                                   [--resource-group-name RESOURCE_GROUP_NAME]
                                   [--iot-hub-name IOT_HUB_NAME]
-                                  [--device-ids-file-path DEVICE_IDS_FILE_PATH]
+                                  --device-ids-file-path DEVICE_IDS_FILE_PATH
+                                  --vendor-credentials-path
+                                  VENDOR_CREDENTIALS_PATH
                                   [--cosmosdb-name COSMOSDB_NAME]
                                   [--app-srv-plan-name APP_SRV_PLAN_NAME]
                                   [--storage-acc-name STORAGE_ACC_NAME]
@@ -241,12 +242,6 @@ If also Azure IIoT cloud modules are to be deployed into an existing K8s cluster
       -h, --help            show this help message and exit
       --azure-subscription-id AZURE_SUBSCRIPTION_ID
                             Azure subscription ID.
-      --vendor-credentials-path VENDOR_CREDENTIALS_PATH
-                            Path to a JSON file containing credentials for each
-                            device vendor server. The JSON object must be of the
-                            following format: {"vendor1": {"endpoint_uri1":
-                            {"x-api-key": API_KEY}, "endpoint_uri2": {"username":
-                            USERNAME, "password": PASSWORD}}, ...}
       --resource-group-name RESOURCE_GROUP_NAME
                             Resource group name for the deployment.
       --iot-hub-name IOT_HUB_NAME
@@ -254,6 +249,12 @@ If also Azure IIoT cloud modules are to be deployed into an existing K8s cluster
       --device-ids-file-path DEVICE_IDS_FILE_PATH
                             Path of the text file containing 1 device id per line
                             to be registered in IotHub.
+      --vendor-credentials-path VENDOR_CREDENTIALS_PATH
+                            Path to a JSON file containing credentials for each
+                            device vendor server. The JSON object must be of the
+                            following format: {"vendor1": {"endpoint_uri1":
+                            {"x-api-key": API_KEY}, "endpoint_uri2": {"username":
+                            USERNAME, "password": PASSWORD}}, ...}
       --cosmosdb-name COSMOSDB_NAME
                             Cosmos DB name for the deployment.
       --app-srv-plan-name APP_SRV_PLAN_NAME
