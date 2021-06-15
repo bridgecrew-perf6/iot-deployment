@@ -61,19 +61,19 @@ If also Azure IIoT cloud modules are to be deployed into an existing K8s cluster
 
 ### `deploy` subcommand usage:
     usage: main.py deploy [-h] --azure-subscription-id AZURE_SUBSCRIPTION_ID
-                          [--resource-group-name RESOURCE_GROUP_NAME]       
+                          [--resource-group-name RESOURCE_GROUP_NAME]
                           [--iot-hub-name IOT_HUB_NAME]
-                          [--device-ids-file-path DEVICE_IDS_FILE_PATH]     
-                          --vendor-credentials-path VENDOR_CREDENTIALS_PATH 
-                          [--cosmosdb-name COSMOSDB_NAME]
+                          [--device-ids-file-path DEVICE_IDS_FILE_PATH]
+                          [--is-edge-device] --vendor-credentials-path
+                          VENDOR_CREDENTIALS_PATH [--cosmosdb-name COSMOSDB_NAME]
                           [--app-srv-plan-name APP_SRV_PLAN_NAME]
                           [--storage-acc-name STORAGE_ACC_NAME]
                           [--functions-name FUNCTIONS_NAME]
-                          [--functions-code-path FUNCTIONS_CODE_PATH]       
+                          [--functions-code-path FUNCTIONS_CODE_PATH]
                           [--location LOCATION]
-                          [--event-hub-namespace EVENT_HUB_NAMESPACE]       
+                          [--event-hub-namespace EVENT_HUB_NAMESPACE]
                           [--event-hub-name EVENT_HUB_NAME]
-                          [--service-bus-namespace SERVICE_BUS_NAMESPACE]   
+                          [--service-bus-namespace SERVICE_BUS_NAMESPACE]
                           [--key-vault-name KEY_VAULT_NAME]
                           [--signalr-name SIGNALR_NAME]
                           [--iiot-app-name IIOT_APP_NAME]
@@ -96,6 +96,8 @@ If also Azure IIoT cloud modules are to be deployed into an existing K8s cluster
       --device-ids-file-path DEVICE_IDS_FILE_PATH
                             Path of the text file containing 1 device id per line
                             to be registered in IotHub.
+      --is-edge-device      The flag for registering the devices as an iot edge
+                            device in Azure IotHub.
       --vendor-credentials-path VENDOR_CREDENTIALS_PATH
                             Path to a JSON file containing credentials for each
                             device vendor server. The JSON object must be of the
@@ -227,7 +229,7 @@ If also Azure IIoT cloud modules are to be deployed into an existing K8s cluster
                                   [--resource-group-name RESOURCE_GROUP_NAME]
                                   [--iot-hub-name IOT_HUB_NAME]
                                   --device-ids-file-path DEVICE_IDS_FILE_PATH
-                                  --vendor-credentials-path
+                                  [--is-edge-device] --vendor-credentials-path
                                   VENDOR_CREDENTIALS_PATH
                                   [--cosmosdb-name COSMOSDB_NAME]
                                   [--app-srv-plan-name APP_SRV_PLAN_NAME]
@@ -249,6 +251,8 @@ If also Azure IIoT cloud modules are to be deployed into an existing K8s cluster
       --device-ids-file-path DEVICE_IDS_FILE_PATH
                             Path of the text file containing 1 device id per line
                             to be registered in IotHub.
+      --is-edge-device      The flag for registering the devices as an iot edge
+                            device in Azure IotHub.
       --vendor-credentials-path VENDOR_CREDENTIALS_PATH
                             Path to a JSON file containing credentials for each
                             device vendor server. The JSON object must be of the
@@ -275,7 +279,7 @@ If also Azure IIoT cloud modules are to be deployed into an existing K8s cluster
     usage: main.py onboard [-h] --azure-subscription-id AZURE_SUBSCRIPTION_ID
                            --resource-group-name RESOURCE_GROUP_NAME
                            --iot-hub-name IOT_HUB_NAME --device-ids-file-path
-                           DEVICE_IDS_FILE_PATH
+                           DEVICE_IDS_FILE_PATH [--is-edge-device]
                            [--logging-level {DEBUG,INFO,WARNING,ERROR,CRITICAL}]
                            [--verbose]
 
@@ -290,6 +294,8 @@ If also Azure IIoT cloud modules are to be deployed into an existing K8s cluster
       --device-ids-file-path DEVICE_IDS_FILE_PATH
                             Path of the text file containing 1 device id per line
                             to be registered in IotHub.
+      --is-edge-device      The flag for registering the devices as an iot edge
+                            device in Azure IotHub.
       --logging-level {DEBUG,INFO,WARNING,ERROR,CRITICAL}
                             Logging level of the program.
       --verbose, -v         The flag for whether there should be logging messages.

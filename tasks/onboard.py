@@ -14,5 +14,6 @@ def task_func(args: argparse.Namespace):
         args.resource_group_name,
         args.iot_hub_name,
         args.device_ids_file_path,
+        args.is_edge_device,
         logger,
     )

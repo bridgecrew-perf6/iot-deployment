@@ -42,6 +42,13 @@ def get_arg_dictionary() -> Dict[str, Dict[str, Any]]:
                     "help": "Path of the text file containing 1 device id per line to be registered in IotHub.",
                 },
             ),
+            (
+                "--is-edge-device",
+                {
+                    "action": "store_true",
+                    "help": "The flag for registering the devices as an iot edge device in Azure IotHub.",
+                },
+            ),
         ]
     )
     return arg_dict
