@@ -8,6 +8,7 @@ from typing import Dict, Optional, Tuple
 from azure.identity import AzureCliCredential
 from azure.mgmt.web import WebSiteManagementClient
 from git import Repo
+from utils import convert
 
 from services import app_srv_plan, cosmosdb, functions
 
@@ -147,7 +148,7 @@ class Provisioner:
         for vendor_name in vendor_names:
             func_conf["bindings"].append(
                 {
-                    "name": f"outputDocument_{vendor_name}",
+                    "name": f"outputDocument{convert.snake_to_camel(vendor_name)}",
                     "direction": "out",
                     "type": "cosmosDB",
                     "databaseName": cosmosdb.COSMOSDB_DB_NAME,

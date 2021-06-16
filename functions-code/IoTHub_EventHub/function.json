@@ -1,5 +1,6 @@
 {
-  "bindings": [{
+  "bindings": [
+    {
       "type": "eventHubTrigger",
       "name": "IoTHubMessages",
       "direction": "in",
@@ -9,7 +10,7 @@
       "consumerGroup": "$Default"
     },
     {
-      "name": "outputDocument_vemcon",
+      "name": "outputDocumentVemcon",
       "direction": "out",
       "type": "cosmosDB",
       "databaseName": "iot",
@@ -17,7 +18,7 @@
       "connectionStringSetting": "cosmosdb-materialfluss_DOCUMENTDB"
     },
     {
-      "name": "outputDocument_mts_smart",
+      "name": "outputDocumentMtsSmart",
       "direction": "out",
       "type": "cosmosDB",
       "databaseName": "iot",

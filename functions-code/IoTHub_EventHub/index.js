@@ -24,8 +24,8 @@ module.exports = function (context, IoTHubMessages) {
         }
     });
 
-    context.bindings.outputDocument_vemcon = output_vemcon;
-    context.bindings.outputDocument_mts_smart = output_mts_smart;
+    context.bindings.outputDocumentVemcon = output_vemcon;
+    context.bindings.outputDocumentMtsSmart = output_mts_smart;
 
     context.done();
 };
