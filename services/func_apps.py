@@ -84,11 +84,19 @@ class Provisioner:
         shutil.copytree(func_app_code_path, func_app_copy_path)
         return func_app_name
 
+    def _make_copy_folder_writable(self):
+        for root, dirs, files in os.walk(self._functions_copy_path):
+            for dir in dirs:
+                os.chmod(os.path.join(root, dir), stat.S_IREAD | stat.S_IWRITE)
+            for file in files:
+                os.chmod(os.path.join(root, file), stat.S_IREAD | stat.S_IWRITE)
+
     def _repo_init(self):
         basename, dirname = os.path.split(self._functions_code_path)
         self._functions_copy_path = os.path.join(basename, f"{dirname}-copy")
         # Remove if there is a folder with the same name.
         if os.path.isdir(self._functions_copy_path):
+            self._make_copy_folder_writable()
             shutil.rmtree(self._functions_copy_path)
         # git init
         self._repo = Repo.init(self._functions_copy_path)
@@ -211,11 +219,7 @@ class Provisioner:
 
     def _cleanup(self):
         self._repo.close()
-        for root, dirs, files in os.walk(self._functions_copy_path):
-            for dir in dirs:
-                os.chmod(os.path.join(root, dir), stat.S_IREAD | stat.S_IWRITE)
-            for file in files:
-                os.chmod(os.path.join(root, file), stat.S_IREAD | stat.S_IWRITE)
+        self._make_copy_folder_writable()
         try:
             shutil.rmtree(self._functions_copy_path)
         except OSError:
