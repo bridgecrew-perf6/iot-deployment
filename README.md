@@ -19,7 +19,7 @@ If also the OPC UA integration is deployed, then:
 
 If also Azure IIoT cloud modules are to be deployed into an existing K8s cluster, then:
 
-1.  **Register** the Azure IIoT modules to Azure AAD and **deploy** the cloud modules into the `kubectl` kubernetes cluster.
+13.  **Register** the Azure IIoT modules to Azure AAD and **deploy** the cloud modules into the `kubectl` kubernetes cluster.
 
 ***
 
