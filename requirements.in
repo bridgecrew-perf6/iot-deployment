@@ -3,6 +3,7 @@ azure-cosmos
 azure-identity
 azure-iot-hub
 azure-mgmt-cosmosdb
+azure-mgmt-eventhub
 azure-mgmt-iothub
 azure-mgmt-keyvault
 azure-mgmt-resource

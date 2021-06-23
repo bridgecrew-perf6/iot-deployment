@@ -38,7 +38,7 @@ If also Azure IIoT cloud modules are to be deployed into an existing K8s cluster
 * The subscription chosen in the terminal **must be the same** as the one provided as a command line argument to the deployment script.
 
 ## **Installing Dependencies:**
-* Install Python3 either system-wide, user-wide or as a virtual environment.
+* Install Python3.7+ either system-wide, user-wide or as a virtual environment.
 * Run `pip install pip-tools` command via the `pip` command associated with the installed Python.
 * Run `pip-sync` inside the project root folder.
 * Install **Azure CLI** from https://docs.microsoft.com/en-us/cli/azure/install-azure-cli .

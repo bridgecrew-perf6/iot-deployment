@@ -14,9 +14,9 @@
                 "-IIoTRepoPath",
                 "D:\\Users\\deniz\\Desktop\\masters\\COURSES\\SS2021\\IDP\\IoT\\development\\repos\\Industrial-IoT",
                 "-AadRegPath",
-                "D:\\Users\\deniz\\Desktop\\masters\\COURSES\\SS2021\\IDP\\IoT\\development\\Azure\\IIoT\\aad.json",
+                "./configs/aad.json",
                 "-ValuesYamlPath",
-                "D:\\Users\\deniz\\Desktop\\masters\\COURSES\\SS2021\\IDP\\IoT\\development\\Azure\\IIoT\\values.yaml",
+                "./configs/values.yaml",
             ]
         },
         {
@@ -101,9 +101,9 @@
                 "--iiot-repo-path",
                 "D:\\Users\\deniz\\Desktop\\masters\\COURSES\\SS2021\\IDP\\IoT\\development\\repos\\Industrial-IoT",
                 "--aad-reg-path",
-                "D:\\Users\\deniz\\Desktop\\masters\\COURSES\\SS2021\\IDP\\IoT\\development\\Azure\\IIoT\\aad.json",
+                "./configs/aad.json",
                 "--helm-values-yaml-path",
-                "D:\\Users\\deniz\\Desktop\\masters\\COURSES\\SS2021\\IDP\\IoT\\development\\Azure\\IIoT\\values.yaml",
+                "./configs/values.yaml",
                 "--location",
                 "West Europe",
                 "--verbose",
@@ -143,9 +143,9 @@
                 "--iiot-repo-path",
                 "D:\\Users\\deniz\\Desktop\\masters\\COURSES\\SS2021\\IDP\\IoT\\development\\repos\\Industrial-IoT",
                 "--aad-reg-path",
-                "D:\\Users\\deniz\\Desktop\\masters\\COURSES\\SS2021\\IDP\\IoT\\development\\Azure\\IIoT\\aad.json",
+                "./configs/aad.json",
                 "--helm-values-yaml-path",
-                "D:\\Users\\deniz\\Desktop\\masters\\COURSES\\SS2021\\IDP\\IoT\\development\\Azure\\IIoT\\values.yaml",
+                "./configs/values.yaml",
             ],
             "justMyCode": false
         }
