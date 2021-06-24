@@ -1,11 +1,12 @@
 #!/bin/bash
 
-
-# BOOTSTRAP THE K8S CLUSTER FOR THE FIRST TIME
 containerd_config_path="./config.toml"
 kubeadm_config_path="./kubeadm-config.yaml"
 # pod_network_addon_config_path="./pod-network-flannel.yml"
+nginx_values_path="./nginx-values.yaml"
 
+
+# BOOTSTRAP THE K8S CLUSTER FOR THE FIRST TIME
 cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf > /dev/null
 br_netfilter
 EOF
@@ -83,4 +84,4 @@ kubectl create -f https://docs.projectcalico.org/manifests/tigera-operator.yaml
 kubectl create -f https://docs.projectcalico.org/manifests/custom-resources.yaml
 # kubectl patch node $(hostname) -p '{"spec":{"podCIDR":"10.100.0.1/24"}}'
 # kubectl apply -f ${pod_network_addon_config_path}
-helm install ingress-controller ingress-nginx/ingress-nginx --values nginx-values.yaml
+helm install ingress-controller ingress-nginx/ingress-nginx --values ${nginx_values_path}
