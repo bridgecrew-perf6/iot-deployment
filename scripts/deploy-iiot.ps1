@@ -10,14 +10,16 @@ param(
     [string] $EvHubNamespace = "event-hub-namespace-materialfluss",
     [string] $EvHubName = "event-hub-materialfluss",
     [string] $SerBusNamespace = "service-bus-namespace-materialfluss",
-    [string] $KeyVaultName = "key-vault-materialfluss",
+    [string] $KeyVaultName = "keyvault-materialfluss",
     [string] $SignalRName = "signalr-materialfluss",
     [string] $IIoTAppName = "azure-iiot-materialfluss",
-    # "D:\Users\deniz\Desktop\masters\COURSES\SS2021\IDP\IoT\development\repos\Industrial-IoT"
+    [string] $TlsSecretYamlPath = "./scripts/tls-secret.yaml",
+    [string] $ServiceHostName = "tumwfml-statum1.srv.mwn.de",
+    # "../Industrial-IoT"
     [Parameter(Mandatory = $true)] [string] $IIoTRepoPath,
-    # "D:\Users\deniz\Desktop\masters\COURSES\SS2021\IDP\IoT\development\Azure\IIoT\aad.json"
+    # "./configs/aad.json"
     [Parameter(Mandatory = $true)] [string] $AadRegPath,
-    # "D:\Users\deniz\Desktop\masters\COURSES\SS2021\IDP\IoT\development\Azure\IIoT\values.yaml"
+    # "./configs/values.yaml"
     [Parameter(Mandatory = $true)] [string] $ValuesYamlPath
 )
 
@@ -65,9 +67,11 @@ if (![System.IO.File]::Exists($AadRegPath)) {
 helm repo add azure-iiot https://azureiiot.blob.core.windows.net/helm
 helm repo update
 kubectl create namespace azure-iiot-ns
+kubectl apply -f $TlsSecretYamlPath
 $aad_json = Get-Content -Raw -Path $AadRegPath | ConvertFrom-Json
 $helm_values_dict = @{
-    azure      = @{
+    externalServiceUrl = $ServiceHostName;
+    azure              = @{
         tenantId            = $tenant_id.Trim('"', "'");
         iotHub              = @{
             eventHub             = @{
@@ -132,9 +136,16 @@ $helm_values_dict = @{
             };
         };
     };
-    deployment = @{
+    deployment         = @{
         ingress = @{
             enabled     = $true;
+            hostName    = $ServiceHostName;
+            tls         = @(
+                @{
+                    secretName = "industrial-iot-tls";
+                    hosts      = @($ServiceHostName);
+                };
+            );
             annotations = @{
                 "kubernetes.io/ingress.class"                        = "nginx";
                 "nginx.ingress.kubernetes.io/affinity"               = "cookie";

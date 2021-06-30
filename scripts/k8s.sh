@@ -2,7 +2,6 @@
 
 containerd_config_path="./config.toml"
 kubeadm_config_path="./kubeadm-config.yaml"
-# pod_network_addon_config_path="./pod-network-flannel.yml"
 nginx_values_path="./nginx-values.yaml"
 
 
@@ -83,7 +82,6 @@ kubectl create -f https://docs.projectcalico.org/manifests/tigera-operator.yaml
 # IP pool CIDR to match your pod network CIDR.
 kubectl create -f https://docs.projectcalico.org/manifests/custom-resources.yaml
 # kubectl patch node $(hostname) -p '{"spec":{"podCIDR":"10.100.0.1/24"}}'
-# kubectl apply -f ${pod_network_addon_config_path}
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 helm repo update
 helm install ingress-controller ingress-nginx/ingress-nginx --values ${nginx_values_path}
