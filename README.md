@@ -56,106 +56,109 @@ If also Azure IIoT cloud modules are to be deployed into an existing K8s cluster
                         IotHub.
 
 ### `deploy` subcommand usage:
-    usage: main.py deploy [-h] --azure-subscription-id AZURE_SUBSCRIPTION_ID
-                          [--resource-group-name RESOURCE_GROUP_NAME]
-                          [--iot-hub-name IOT_HUB_NAME]
-                          [--device-ids-file-path DEVICE_IDS_FILE_PATH]
-                          [--is-edge-device] --vendor-credentials-path
-                          VENDOR_CREDENTIALS_PATH [--cosmosdb-name COSMOSDB_NAME]
-                          [--app-srv-plan-name APP_SRV_PLAN_NAME]
-                          [--storage-acc-name STORAGE_ACC_NAME]
-                          [--functions-name FUNCTIONS_NAME]
-                          [--functions-code-path FUNCTIONS_CODE_PATH]
-                          [--location LOCATION]
-                          [--event-hub-namespace EVENT_HUB_NAMESPACE]
-                          [--event-hub-name EVENT_HUB_NAME]
-                          [--service-bus-namespace SERVICE_BUS_NAMESPACE]
-                          [--key-vault-name KEY_VAULT_NAME]
-                          [--signalr-name SIGNALR_NAME]
-                          [--iiot-app-name IIOT_APP_NAME]
-                          [--iiot-repo-path IIOT_REPO_PATH]
-                          [--aad-reg-path AAD_REG_PATH]
-                          [--helm-values-yaml-path HELM_VALUES_YAML_PATH]
-                          --tenant-id TENANT_ID
-                          [--logging-level {DEBUG,INFO,WARNING,ERROR,CRITICAL}]
-                          [--verbose]
-                          {iiot,vanilla} ...
+    usage: main.py deploy [-h] --azure-subscription-id AZURE_SUBSCRIPTION_ID     
+                        [--resource-group-name RESOURCE_GROUP_NAME]
+                        [--iot-hub-name IOT_HUB_NAME]
+                        [--device-ids-file-path DEVICE_IDS_FILE_PATH]
+                        [--is-edge-device] --vendor-credentials-path
+                        VENDOR_CREDENTIALS_PATH [--cosmosdb-name COSMOSDB_NAME]
+                        [--app-srv-plan-name APP_SRV_PLAN_NAME]
+                        [--storage-acc-name STORAGE_ACC_NAME]
+                        [--functions-name FUNCTIONS_NAME]
+                        [--functions-code-path FUNCTIONS_CODE_PATH]
+                        [--location LOCATION]
+                        [--event-hub-namespace EVENT_HUB_NAMESPACE]
+                        [--event-hub-name EVENT_HUB_NAME]
+                        [--service-bus-namespace SERVICE_BUS_NAMESPACE]        
+                        [--key-vault-name KEY_VAULT_NAME]
+                        [--signalr-name SIGNALR_NAME]
+                        [--iiot-app-name IIOT_APP_NAME] --service-hostname
+                        SERVICE_HOSTNAME [--iiot-repo-path IIOT_REPO_PATH]
+                        [--aad-reg-path AAD_REG_PATH]
+                        [--helm-values-yaml-path HELM_VALUES_YAML_PATH]
+                        --tenant-id TENANT_ID
+                        [--logging-level {DEBUG,INFO,WARNING,ERROR,CRITICAL}]
+                        [--verbose]
+                        {iiot,vanilla} ...
 
     optional arguments:
-      -h, --help            show this help message and exit
-      --azure-subscription-id AZURE_SUBSCRIPTION_ID
+    -h, --help            show this help message and exit
+    --azure-subscription-id AZURE_SUBSCRIPTION_ID
                             Azure subscription ID.
-      --resource-group-name RESOURCE_GROUP_NAME
+    --resource-group-name RESOURCE_GROUP_NAME
                             Resource group name for the deployment.
-      --iot-hub-name IOT_HUB_NAME
+    --iot-hub-name IOT_HUB_NAME
                             IotHub name for the deployment.
-      --device-ids-file-path DEVICE_IDS_FILE_PATH
+    --device-ids-file-path DEVICE_IDS_FILE_PATH
                             Path of the text file containing 1 device id per line
                             to be registered in IotHub.
-      --is-edge-device      The flag for registering the devices as an iot edge
+    --is-edge-device      The flag for registering the devices as an iot edge
                             device in Azure IotHub.
-      --vendor-credentials-path VENDOR_CREDENTIALS_PATH
+    --vendor-credentials-path VENDOR_CREDENTIALS_PATH
                             Path to a JSON file containing credentials for each
                             device vendor server. The JSON object must be of the
                             following format: {"vendor1": {"endpoint_uri1":
                             {"x-api-key": API_KEY}, "endpoint_uri2": {"username":
                             USERNAME, "password": PASSWORD}}, ...}
-      --cosmosdb-name COSMOSDB_NAME
+    --cosmosdb-name COSMOSDB_NAME
                             Cosmos DB name for the deployment.
-      --app-srv-plan-name APP_SRV_PLAN_NAME
+    --app-srv-plan-name APP_SRV_PLAN_NAME
                             App Service Plan name for the deployment.
-      --storage-acc-name STORAGE_ACC_NAME
+    --storage-acc-name STORAGE_ACC_NAME
                             Storage account name for the deployment.
-      --functions-name FUNCTIONS_NAME
+    --functions-name FUNCTIONS_NAME
                             Azure Functions name for the deployment.
-      --functions-code-path FUNCTIONS_CODE_PATH
+    --functions-code-path FUNCTIONS_CODE_PATH
                             Path to the folder containing Azure Functions source
                             code. Be warned that '.git' folder will be erased!
-      --location LOCATION   Location of the Azure datacenter for the deployment.
-      --event-hub-namespace EVENT_HUB_NAMESPACE
+    --location LOCATION   Location of the Azure datacenter for the deployment.
+    --event-hub-namespace EVENT_HUB_NAMESPACE
                             Name of the EventHub namespace for the deployment.
-      --event-hub-name EVENT_HUB_NAME
+    --event-hub-name EVENT_HUB_NAME
                             Name of the EventHub to provision inside the EventHub
                             namespace.
-      --service-bus-namespace SERVICE_BUS_NAMESPACE
+    --service-bus-namespace SERVICE_BUS_NAMESPACE
                             Name of the ServiceBus for the deployment.
-      --key-vault-name KEY_VAULT_NAME
+    --key-vault-name KEY_VAULT_NAME
                             Name of the Key Vault for the deployment.
-      --signalr-name SIGNALR_NAME
+    --signalr-name SIGNALR_NAME
                             Name of the SignalR for the deployment.
-      --iiot-app-name IIOT_APP_NAME
+    --iiot-app-name IIOT_APP_NAME
                             Name of the Azure IIoT app to be registered in AAD, as
                             '<app_name>-client', '<app_name>-web' and
                             '<app_name>-service'.
-      --iiot-repo-path IIOT_REPO_PATH
+    --service-hostname SERVICE_HOSTNAME
+                            Host (domain) name where the IIoT cloud services will
+                            be available at.
+    --iiot-repo-path IIOT_REPO_PATH
                             Path to the Git repository of Azure IIoT. You can
                             clone it from https://github.com/Azure/Industrial-IoT.
                             If not given, then Azure IIoT modules will not be
                             deployed. But the required services will be deployed.
-      --aad-reg-path AAD_REG_PATH
+    --aad-reg-path AAD_REG_PATH
                             Path to the '.json' file to be created during the
                             registration of Azure IIoT modules in AAD. This file
                             will also be used to deploy the modules into 'kubectl'
                             kubernetes cluster. If not given, then Azure IIoT
                             modules will not be deployed. But the required
                             services will be deployed.
-      --helm-values-yaml-path HELM_VALUES_YAML_PATH
+    --helm-values-yaml-path HELM_VALUES_YAML_PATH
                             Path to the 'values.yaml' to be created and to be used
                             by Helm during the deployment of Azure IIoT cloud
                             modules. If not given, then Azure IIoT modules will
                             not be deployed. But the required services will be
                             deployed.
-      --tenant-id TENANT_ID
+    --tenant-id TENANT_ID
                             The Azure Active Directory tenant ID that should be
                             used for authenticating requests to the key vault.
-      --logging-level {DEBUG,INFO,WARNING,ERROR,CRITICAL}
+    --logging-level {DEBUG,INFO,WARNING,ERROR,CRITICAL}
                             Logging level of the program.
-      --verbose, -v         The flag for whether there should be logging messages.
+    --verbose, -v         The flag for whether there should be logging messages.
 
     Subcommands:
-      For this command, no subcommand is also possible.
+    For this command, no subcommand is also possible.
 
-      {iiot,vanilla}
+    {iiot,vanilla}
         iiot                Subcommand to register and deploy only Azure IIoT
                             cloud modules into an existing kubernetes cluster
                             (uses 'deploy-iiot.ps1').
@@ -164,60 +167,64 @@ If also Azure IIoT cloud modules are to be deployed into an existing K8s cluster
 
 #### `deploy iiot` subcommand usages:
     usage: main.py deploy iiot [-h] [--resource-group-name RESOURCE_GROUP_NAME]
-                               [--iot-hub-name IOT_HUB_NAME]
-                               [--cosmosdb-name COSMOSDB_NAME]
-                               [--storage-acc-name STORAGE_ACC_NAME]
-                               [--event-hub-namespace EVENT_HUB_NAMESPACE]
-                               [--event-hub-name EVENT_HUB_NAME]
-                               [--service-bus-namespace SERVICE_BUS_NAMESPACE]
-                               [--key-vault-name KEY_VAULT_NAME]
-                               [--signalr-name SIGNALR_NAME]
-                               [--iiot-app-name IIOT_APP_NAME] --iiot-repo-path
-                               IIOT_REPO_PATH --aad-reg-path AAD_REG_PATH
-                               --helm-values-yaml-path HELM_VALUES_YAML_PATH
-                               [--logging-level {DEBUG,INFO,WARNING,ERROR,CRITICAL}]
-                               [--verbose]
+                            [--iot-hub-name IOT_HUB_NAME]
+                            [--cosmosdb-name COSMOSDB_NAME]
+                            [--storage-acc-name STORAGE_ACC_NAME]
+                            [--event-hub-namespace EVENT_HUB_NAMESPACE]
+                            [--event-hub-name EVENT_HUB_NAME]
+                            [--service-bus-namespace SERVICE_BUS_NAMESPACE]
+                            [--key-vault-name KEY_VAULT_NAME]
+                            [--signalr-name SIGNALR_NAME]
+                            [--iiot-app-name IIOT_APP_NAME] --service-hostname
+                            SERVICE_HOSTNAME --iiot-repo-path IIOT_REPO_PATH
+                            --aad-reg-path AAD_REG_PATH --helm-values-yaml-path
+                            HELM_VALUES_YAML_PATH
+                            [--logging-level {DEBUG,INFO,WARNING,ERROR,CRITICAL}]
+                            [--verbose]
 
     optional arguments:
-      -h, --help            show this help message and exit
-      --resource-group-name RESOURCE_GROUP_NAME
+    -h, --help            show this help message and exit
+    --resource-group-name RESOURCE_GROUP_NAME
                             Resource group name for the deployment.
-      --iot-hub-name IOT_HUB_NAME
+    --iot-hub-name IOT_HUB_NAME
                             IotHub name for the deployment.
-      --cosmosdb-name COSMOSDB_NAME
+    --cosmosdb-name COSMOSDB_NAME
                             Cosmos DB name for the deployment.
-      --storage-acc-name STORAGE_ACC_NAME
+    --storage-acc-name STORAGE_ACC_NAME
                             Storage account name for the deployment.
-      --event-hub-namespace EVENT_HUB_NAMESPACE
+    --event-hub-namespace EVENT_HUB_NAMESPACE
                             Name of the EventHub namespace for the deployment.
-      --event-hub-name EVENT_HUB_NAME
+    --event-hub-name EVENT_HUB_NAME
                             Name of the EventHub to provision inside the EventHub
                             namespace.
-      --service-bus-namespace SERVICE_BUS_NAMESPACE
+    --service-bus-namespace SERVICE_BUS_NAMESPACE
                             Name of the ServiceBus for the deployment.
-      --key-vault-name KEY_VAULT_NAME
+    --key-vault-name KEY_VAULT_NAME
                             Name of the Key Vault for the deployment.
-      --signalr-name SIGNALR_NAME
+    --signalr-name SIGNALR_NAME
                             Name of the SignalR for the deployment.
-      --iiot-app-name IIOT_APP_NAME
+    --iiot-app-name IIOT_APP_NAME
                             Name of the Azure IIoT app to be registered in AAD, as
                             '<app_name>-client', '<app_name>-web' and
                             '<app_name>-service'.
-      --iiot-repo-path IIOT_REPO_PATH
+    --service-hostname SERVICE_HOSTNAME
+                            Host (domain) name where the IIoT cloud services will
+                            be available at.
+    --iiot-repo-path IIOT_REPO_PATH
                             Path to the Git repository of Azure IIoT. You can
                             clone it from https://github.com/Azure/Industrial-IoT.
-      --aad-reg-path AAD_REG_PATH
+    --aad-reg-path AAD_REG_PATH
                             Path to the '.json' file to be created during the
                             registration of Azure IIoT modules in AAD. This file
                             will also be used to deploy the modules into 'kubectl'
                             kubernetes cluster.
-      --helm-values-yaml-path HELM_VALUES_YAML_PATH
+    --helm-values-yaml-path HELM_VALUES_YAML_PATH
                             Path to the 'values.yaml' to be created and to be used
                             by Helm during the deployment of Azure IIoT cloud
                             modules.
-      --logging-level {DEBUG,INFO,WARNING,ERROR,CRITICAL}
+    --logging-level {DEBUG,INFO,WARNING,ERROR,CRITICAL}
                             Logging level of the program.
-      --verbose, -v         The flag for whether there should be logging messages.
+    --verbose, -v         The flag for whether there should be logging messages.
 
 #### `deploy vanilla` subcommand usage:
     usage: main.py deploy vanilla [-h] --azure-subscription-id
