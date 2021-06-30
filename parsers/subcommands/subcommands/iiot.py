@@ -19,6 +19,8 @@ from tasks import deploy_iiot
 
 
 def get_arg_dictionary() -> Dict[str, Dict[str, Any]]:
+    # TODO: add more command line arguments to allow a choice between a local K8s vs AKS.
+
     # Do not use positional arguments, to prevent possible collision with subcommand names!
     arg_dict = OrderedDict(
         [

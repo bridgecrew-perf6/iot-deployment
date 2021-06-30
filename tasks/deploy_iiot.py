@@ -5,6 +5,8 @@ import sys
 
 
 def task_func(args: argparse.Namespace):
+    # TODO: allow to deploy either to a local K8s cluster or to AKS, based on 'args'.
+
     # Step 13: Register the Azure IIoT modules to Azure AAD and deploy
     # the cloud modules into the 'kubectl' kubernetes cluster.
     if any(arg is None for arg in [args.iiot_repo_path, args.aad_reg_path, args.helm_values_yaml_path]):
