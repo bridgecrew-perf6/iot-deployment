@@ -21,22 +21,6 @@ If also Azure IIoT cloud modules are to be deployed into an existing K8s cluster
 
 13.  **Register** the Azure IIoT modules to Azure AAD and **deploy** the cloud modules into the `kubectl` kubernetes cluster.
 
-***
-
-* **Requires executing the following commands in any terminal** (check [installing dependencies](#installing-dependencies)):
-  1. `az login` to login,
-  2. `az account list -o table` to see subscriptions,
-  3. `az account set --subscription="<SubscriptionId>"` to choose a subscription for deployment.
-<!-- * **Requires**:
-  * Setting up a service principal. Run the following sequence of commands in `powershell`:
-    1. `az login` to login,
-    2. `az account list -o table` to see subscriptions,
-    3. `az account set --subscription="<SubscriptionId>"` to choose a subscription for deployment,
-    4. `az ad sp create-for-rbac --name DeploymentPrincipal --role Contributor` to create a service principal with **Contributor** access level.
-  * **TODO: Write more!** -->
-
-* The subscription chosen in the terminal **must be the same** as the one provided as a command line argument to the deployment script.
-
 ## **Installing Dependencies:**
 * Install Python3.7+ either system-wide, user-wide or as a virtual environment.
 * Run `pip install pip-tools` command via the `pip` command associated with the installed Python.
@@ -46,6 +30,18 @@ If also Azure IIoT cloud modules are to be deployed into an existing K8s cluster
   * Run `az extension add --name azure-iot` from any terminal.
   * Run `Install-Module powershell-yaml` in PowerShell.
   * Install and set up `kubectl` and `helm`. Also make sure they are **accessible from the PowerShell**.
+
+## **Requires:**
+* `az login` to log into the Azure account.
+* If you want to deploy **OPC UA integration** as well, then modify `./scripts/tls-secrets.yaml` file to have the correct certificate and keys, before running the deployment script.
+  * You need to convert the certificate or private key file into base64 code (e.g., run `cat /path/to/cert | base64 -w0 > cert.base64` in bash).
+<!-- * **Requires**:
+* Setting up a service principal. Run the following sequence of commands in `powershell`:
+  1. `az login` to login,
+  2. `az account list -o table` to see subscriptions,
+  3. `az account set --subscription="<SubscriptionId>"` to choose a subscription for deployment,
+  4. `az ad sp create-for-rbac --name DeploymentPrincipal --role Contributor` to create a service principal with **Contributor** access level.
+* **TODO: Write more!** -->
 
 ## **Usage:**
     usage: main.py [-h] {deploy,onboard} ...

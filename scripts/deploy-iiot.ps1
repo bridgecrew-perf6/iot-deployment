@@ -14,7 +14,8 @@ param(
     [string] $SignalRName = "signalr-materialfluss",
     [string] $IIoTAppName = "azure-iiot-materialfluss",
     [string] $TlsSecretYamlPath = "./scripts/tls-secret.yaml",
-    [string] $ServiceHostName = "tumwfml-statum1.srv.mwn.de",
+    # "tumwfml-statum1.srv.mwn.de"
+    [Parameter(Mandatory = $true)] [string] $ServiceHostName,
     # "../Industrial-IoT"
     [Parameter(Mandatory = $true)] [string] $IIoTRepoPath,
     # "./configs/aad.json"

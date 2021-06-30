@@ -19,8 +19,6 @@ from tasks import deploy_iiot
 
 
 def get_arg_dictionary() -> Dict[str, Dict[str, Any]]:
-    # TODO: add more command line arguments to allow a choice between a local K8s vs AKS.
-
     # Do not use positional arguments, to prevent possible collision with subcommand names!
     arg_dict = OrderedDict(
         [
@@ -103,6 +101,14 @@ def get_arg_dictionary() -> Dict[str, Dict[str, Any]]:
                     "default": DEFAULT_IIOT_APP_NAME,
                     "help": "Name of the Azure IIoT app to be registered in AAD, "
                     "as '<app_name>-client', '<app_name>-web' and '<app_name>-service'.",
+                },
+            ),
+            (
+                "--service-hostname",
+                {
+                    "type": str,
+                    "required": True,
+                    "help": "Host (domain) name where the IIoT cloud services will be available at.",
                 },
             ),
             (
