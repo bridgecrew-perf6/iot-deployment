@@ -49,6 +49,13 @@ def get_arg_dictionary() -> Dict[str, Dict[str, Any]]:
                     "help": "The flag for registering the devices as an iot edge device in Azure IotHub.",
                 },
             ),
+            (
+                "--is-iiot-device",
+                {
+                    "action": "store_true",
+                    "help": "The flag indicating whether the devices will run the Azure IIoT edge modules.",
+                },
+            ),
         ]
     )
     return arg_dict

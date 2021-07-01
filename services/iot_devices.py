@@ -3,10 +3,12 @@ import json
 import logging
 import os
 import secrets
+import sys
 from typing import Dict, Tuple
 
 from azure.identity import AzureCliCredential
 from azure.iot.hub import IoTHubRegistryManager
+from azure.iot.hub.models import Twin
 from msrest.exceptions import HttpOperationError
 from utils import load_file
 
@@ -48,8 +50,12 @@ def provision(
     iot_hub_name: str,
     device_ids_file_path: str,
     is_edge_device: bool,
+    is_iiot_device: bool,
     logger: logging.Logger,
 ):
+    if is_iiot_device and not is_edge_device:
+        logger.error("'is_iiot_device' flag implies 'is_edge_device' which is not satisfied")
+        sys.exit(1)
     device_ids = load_file.load_device_ids(device_ids_file_path)
     conn_str = iot_hub.get_connection_str(credential, azure_subscription_id, resource_group_name, iot_hub_name)
     iot_hub_reg_mgr = IoTHubRegistryManager(conn_str)
@@ -63,10 +69,14 @@ def provision(
             iot_hub_reg_mgr.create_device_with_sas(device_id, primary_key, secondary_key, "enabled", iot_edge=is_edge_device)
             logger.info(f"Device '{device_id}' is registered to IotHub")
         except HttpOperationError as e:
+            # https://docs.microsoft.com/en-us/rest/api/iothub/common-error-codes
             if not hasattr(e.response, "status_code") or e.response.status_code != 409:
                 raise e
             device_keys.remove_device(device_id)
             logger.info(f"Device '{device_id}' is already registered")
+        if is_iiot_device:
+            device_twin = Twin(tags={"__type__": "iiotedge", "os": "Linux"})
+            iot_hub_reg_mgr.update_twin(device_id, device_twin)
 
     if not device_ids_file_path or not device_keys.id_to_keys:
         return

@@ -154,6 +154,29 @@
                 "./configs/values.yaml",
             ],
             "justMyCode": false
-        }
+        },
+        {
+            "name": "Python: Onboarding",
+            "type": "python",
+            "request": "launch",
+            "program": "main.py",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}",
+            "args": [
+                "onboard",
+                "--azure-subscription-id",
+                "d74ce0e8-f6a3-4003-9947-c7f593ee842b",
+                "--resource-group-name",
+                "IoT-project",
+                "--iot-hub-name",
+                "iot-hub-materialfluss",
+                "--device-ids-file-path",
+                "./configs/iot-devices/ids.txt",
+                "--is-edge-device",
+                "--is-iiot-device",
+                "--verbose",
+            ],
+            "justMyCode": false
+        },
     ]
 }
