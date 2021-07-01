@@ -33,7 +33,7 @@ def provision(
             features="DeviceManagement",
         )
         # IotHub free: "F1", Standard: "S1"
-        iot_hub_sku_info = IotHubSkuInfo(name="F1", capacity=1)
+        iot_hub_sku_info = IotHubSkuInfo(name="S1", capacity=1)
         iot_hub_desc = IotHubDescription(location=location, properties=iot_hub_properties, sku=iot_hub_sku_info)
         poller = iot_hub_client.iot_hub_resource.begin_create_or_update(resource_group_name, iot_hub_name, iot_hub_desc)
         iot_res = poller.result()

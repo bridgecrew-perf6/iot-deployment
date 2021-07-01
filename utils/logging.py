@@ -15,7 +15,7 @@ LOGGING_LEVEL_VAL: Dict[str, int] = {
 def configure_app_logger(args: argparse.Namespace) -> Logger:
     # Configure all loggers.
     logging.basicConfig(
-        format="%(asctime)s | %(levelname)s | %(name)s: %(message)s",
+        format="%(asctime)s | %(levelname)s | %(module)s: %(message)s",
         datefmt="%d-%m-%Y %H:%M",
     )
     # Disable global logger.
