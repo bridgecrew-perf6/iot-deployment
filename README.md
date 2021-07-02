@@ -25,10 +25,14 @@ If also Azure IIoT cloud modules are to be deployed into an existing K8s cluster
 * Install Python3.7+ either system-wide, user-wide or as a virtual environment.
 * Run `pip install pip-tools` command via the `pip` command associated with the installed Python.
 * Run `pip-sync` inside the project root folder.
-* Install **Azure CLI** from https://docs.microsoft.com/en-us/cli/azure/install-azure-cli .
+* Install **Azure CLI** from [HERE](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli).
 * If you want to deploy **OPC UA integration** as well, then:
   * Run `az extension add --name azure-iot` from any terminal.
-  * Run `Install-Module powershell-yaml` in PowerShell.
+  * Install powershell, see [HERE](https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell?view=powershell-7.1).
+  * Run the following in PowerShell:
+    * `Install-Module -Name Az -Repository PSGallery -Force`
+    * `Install-Module -Name AzureAD -Repository PSGallery -Force`
+    * `Install-Module powershell-yaml`
   * Install and set up `kubectl` and `helm`. Also make sure they are **accessible from the PowerShell**.
 
 ## **Requires:**
