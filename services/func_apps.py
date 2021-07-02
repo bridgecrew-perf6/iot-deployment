@@ -14,7 +14,7 @@ from services import app_srv_plan, cosmosdb, functions
 
 # Make sure that there is a `TimerTrigger_<vendor_name>` Azure function for pulling
 # device telemetry data from each vendor name below.
-PULL_VENDOR_NAMES: Tuple[str, ...] = ("vemcon",)
+PULL_VENDOR_NAMES: Tuple[str, ...] = ("vemcon", "mts_smart")
 assert set(PULL_VENDOR_NAMES).issubset(
     set(cosmosdb.VENDOR_NAMES)
 ), "pull device vendors must also be registered as vendors in cosmosdb"
@@ -182,7 +182,7 @@ class Provisioner:
                     },
                 ]
             },
-            all_creds["vemcon"],
+            all_creds[vendor_name],
         )
 
     def _configure_func_app(self, func_app_name: str, func_conf: Dict, credentials: Optional[Dict] = None):
