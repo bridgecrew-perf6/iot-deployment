@@ -11,7 +11,7 @@ from azure.mgmt.cosmosdb.models import BackupPolicy, ConsistencyPolicy, Database
 COSMOSDB_DB_NAME = "iot"
 MSG_CONTAINER_PART_KEY = "/deviceId"
 # Make sure the vendor names are known to `IoTHub_EventHub` Azure function.
-VENDOR_NAMES: Tuple[str, ...] = ("vemcon", "mts_smart", "exelonix")
+VENDOR_NAMES: Tuple[str, ...] = ("vemcon", "mts_smart", "exelonix", "test_vendor")
 LATEST_MSG_CONTAINER_TEMPLATE = "_latest_{}"
 LEASES_CONTAINER_TEMPLATE = "_leases_{}"
 LATEST_MSG_CONTAINER_PART_KEY = "/id"
