@@ -3,7 +3,8 @@ module.exports = function (context, IoTHubMessages) {
         return;
     }
 
-    var [output_vemcon, output_mts_smart] = [
+    var [output_vemcon, output_mts_smart, output_exelonix] = [
+        [],
         [],
         []
     ];
@@ -18,6 +19,8 @@ module.exports = function (context, IoTHubMessages) {
                 case "mts_smart":
                     output_mts_smart.push(message);
                     break;
+                case "exelonix":
+                    output_exelonix.push(message);
                 default:
                     break;
             }
@@ -26,6 +29,7 @@ module.exports = function (context, IoTHubMessages) {
 
     context.bindings.outputDocumentVemcon = output_vemcon;
     context.bindings.outputDocumentMtsSmart = output_mts_smart;
+    context.bindings.outputDocumentExelonix = output_exelonix;
 
     context.done();
 };
