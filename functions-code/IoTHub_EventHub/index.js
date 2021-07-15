@@ -21,6 +21,7 @@ module.exports = function (context, IoTHubMessages) {
                     break;
                 case "exelonix":
                     output_exelonix.push(message);
+                    break;
                 default:
                     break;
             }
