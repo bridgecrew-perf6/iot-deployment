@@ -32,6 +32,7 @@ If also Azure IIoT cloud modules are to be deployed into an existing K8s cluster
   * Run the following in PowerShell:
     * `Install-Module -Name Az -Repository PSGallery -Force`
     * `Install-Module -Name AzureAD -Repository PSGallery -Force`
+      * Currently `AzureAD` module is only functional in PowerShell version 5, which **requires Windows 10**.
     * `Install-Module powershell-yaml`
   * Install and set up `kubectl` and `helm`. Also make sure they are **accessible from the PowerShell**.
 
