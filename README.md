@@ -12,10 +12,10 @@ The following steps of Azure service provisioning are executed by the deployment
 
 If also the OPC UA integration is deployed, then:
 
-9. Provision the **EventHub namespace** and **EventHub** inside it,
-10. Provision the **ServiceBus namespace**,
-11. Provision the **Key Vault**,
-12. Provision the **SignalR**,
+9. Provision an **EventHub namespace** and **EventHub** inside it,
+10. Provision a **ServiceBus namespace**,
+11. Provision a **Key Vault**,
+12. Provision a **SignalR**,
 
 If also Azure IIoT cloud modules are to be deployed into an existing K8s cluster, then:
 
@@ -315,3 +315,9 @@ If also Azure IIoT cloud modules are to be deployed into an existing K8s cluster
       --logging-level {DEBUG,INFO,WARNING,ERROR,CRITICAL}
                             Logging level of the program.
       --verbose, -v         The flag for whether there should be logging messages.
+
+## Bootstrap a Single Node K8s Cluster
+You may use `./scripts/k8s.sh` helper script in order to bootstrap a single node K8s cluster. Before you run it, make sure:
+* `docker` is installed,
+* `./scripts/kubeadm-config.yaml` and `./scripts/nginx-values.yaml` files are configured correctly.
+  * Especially take care of `controller.service.externalIPs` field in the nginx configurations.
