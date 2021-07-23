@@ -41,7 +41,7 @@ sudo mkdir -p /etc/containerd
 sudo cp ${containerd_config_path} /etc/containerd/
 sudo systemctl restart containerd
 
-sudo mkdir /etc/docker
+sudo mkdir -p /etc/docker
 cat <<EOF | sudo tee /etc/docker/daemon.json > /dev/null
 {
   "exec-opts": ["native.cgroupdriver=systemd"],
