@@ -71,6 +71,9 @@ kubectl create namespace azure-iiot-ns
 kubectl apply -f $TlsSecretYamlPath
 $aad_json = Get-Content -Raw -Path $AadRegPath | ConvertFrom-Json
 $helm_values_dict = @{
+    image              = @{
+        tag = "2.7.206";
+    };
     externalServiceUrl = $ServiceHostName;
     azure              = @{
         tenantId            = $tenant_id.Trim('"', "'");
