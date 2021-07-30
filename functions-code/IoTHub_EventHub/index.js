@@ -6,6 +6,7 @@ module.exports = function (context, IoTHubMessages) {
     var [output_vemcon, output_mts_smart, output_exelonix, output_test_vendor] = [
         [],
         [],
+        [],
         []
     ];
     IoTHubMessages.forEach((message, i) => {

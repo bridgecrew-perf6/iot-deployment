@@ -58,6 +58,14 @@ def get_arg_dictionary() -> Dict[str, Dict[str, Any]]:
                 },
             ),
             (
+                "--device-ids-file-path",
+                {
+                    "type": str,
+                    "default": "",
+                    "help": "Path of the text file containing 1 device id per line to be registered in IotHub.",
+                },
+            ),
+            (
                 "--cosmosdb-name",
                 {
                     "type": str,
