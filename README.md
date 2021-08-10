@@ -66,13 +66,13 @@ If also Azure IIoT cloud modules are to be deployed into an existing K8s cluster
                           [--iot-hub-name IOT_HUB_NAME]
                           [--device-ids-file-path DEVICE_IDS_FILE_PATH]     
                           [--is-edge-device] [--is-iiot-device]
-                          --vendor-credentials-path VENDOR_CREDENTIALS_PATH 
+                          --vendor-credentials-path VENDOR_CREDENTIALS_PATH
                           [--cosmosdb-name COSMOSDB_NAME]
                           [--app-srv-plan-name APP_SRV_PLAN_NAME]
                           [--storage-acc-name STORAGE_ACC_NAME]
                           [--functions-name FUNCTIONS_NAME]
                           [--functions-code-path FUNCTIONS_CODE_PATH]
-                          [--location LOCATION]
+                          [--location LOCATION] --tenant-id TENANT_ID
                           [--event-hub-namespace EVENT_HUB_NAMESPACE]
                           [--event-hub-name EVENT_HUB_NAME]
                           [--service-bus-namespace SERVICE_BUS_NAMESPACE]
@@ -82,7 +82,6 @@ If also Azure IIoT cloud modules are to be deployed into an existing K8s cluster
                           SERVICE_HOSTNAME [--iiot-repo-path IIOT_REPO_PATH]
                           [--aad-reg-path AAD_REG_PATH]
                           [--helm-values-yaml-path HELM_VALUES_YAML_PATH]
-                          --tenant-id TENANT_ID
                           [--logging-level {DEBUG,INFO,WARNING,ERROR,CRITICAL}]
                           [--verbose]
                           {iiot,vanilla} ...
@@ -120,6 +119,9 @@ If also Azure IIoT cloud modules are to be deployed into an existing K8s cluster
                             Path to the folder containing Azure Functions source
                             code. Be warned that '.git' folder will be erased!
       --location LOCATION   Location of the Azure datacenter for the deployment.
+      --tenant-id TENANT_ID
+                            The Azure Active Directory tenant ID that should be
+                            used for authenticating requests to the key vault.
       --event-hub-namespace EVENT_HUB_NAMESPACE
                             Name of the EventHub namespace for the deployment.
       --event-hub-name EVENT_HUB_NAME
@@ -156,9 +158,6 @@ If also Azure IIoT cloud modules are to be deployed into an existing K8s cluster
                             modules. If not given, then Azure IIoT modules will
                             not be deployed. But the required services will be
                             deployed.
-      --tenant-id TENANT_ID
-                            The Azure Active Directory tenant ID that should be
-                            used for authenticating requests to the key vault.
       --logging-level {DEBUG,INFO,WARNING,ERROR,CRITICAL}
                             Logging level of the program.
       --verbose, -v         The flag for whether there should be logging messages.
@@ -174,7 +173,9 @@ If also Azure IIoT cloud modules are to be deployed into an existing K8s cluster
                             (without OPC UA integration).
 
 #### `deploy iiot` subcommand usages:
-    usage: main.py deploy iiot [-h] [--resource-group-name RESOURCE_GROUP_NAME]
+    usage: main.py deploy iiot [-h] --azure-subscription-id AZURE_SUBSCRIPTION_ID
+                               --tenant-id TENANT_ID
+                               [--resource-group-name RESOURCE_GROUP_NAME]
                                [--iot-hub-name IOT_HUB_NAME]
                                [--cosmosdb-name COSMOSDB_NAME]
                                [--storage-acc-name STORAGE_ACC_NAME]
@@ -184,14 +185,20 @@ If also Azure IIoT cloud modules are to be deployed into an existing K8s cluster
                                [--key-vault-name KEY_VAULT_NAME]
                                [--signalr-name SIGNALR_NAME]
                                [--iiot-app-name IIOT_APP_NAME] --service-hostname
-                               SERVICE_HOSTNAME --iiot-repo-path IIOT_REPO_PATH
-                               --aad-reg-path AAD_REG_PATH --helm-values-yaml-path
-                               HELM_VALUES_YAML_PATH
+                               SERVICE_HOSTNAME [--iiot-repo-path IIOT_REPO_PATH]
+                               [--aad-reg-path AAD_REG_PATH]
+                               [--helm-values-yaml-path HELM_VALUES_YAML_PATH]
+                               [--location LOCATION]
                                [--logging-level {DEBUG,INFO,WARNING,ERROR,CRITICAL}]
                                [--verbose]
 
     optional arguments:
       -h, --help            show this help message and exit
+      --azure-subscription-id AZURE_SUBSCRIPTION_ID
+                            Azure subscription ID.
+      --tenant-id TENANT_ID
+                            The Azure Active Directory tenant ID that should be
+                            used for authenticating requests to the key vault.
       --resource-group-name RESOURCE_GROUP_NAME
                             Resource group name for the deployment.
       --iot-hub-name IOT_HUB_NAME
@@ -221,15 +228,22 @@ If also Azure IIoT cloud modules are to be deployed into an existing K8s cluster
       --iiot-repo-path IIOT_REPO_PATH
                             Path to the Git repository of Azure IIoT. You can
                             clone it from https://github.com/Azure/Industrial-IoT.
+                            If not given, then Azure IIoT modules will not be
+                            deployed. But the required services will be deployed.
       --aad-reg-path AAD_REG_PATH
                             Path to the '.json' file to be created during the
                             registration of Azure IIoT modules in AAD. This file
                             will also be used to deploy the modules into 'kubectl'
-                            kubernetes cluster.
+                            kubernetes cluster. If not given, then Azure IIoT
+                            modules will not be deployed. But the required
+                            services will be deployed.
       --helm-values-yaml-path HELM_VALUES_YAML_PATH
                             Path to the 'values.yaml' to be created and to be used
                             by Helm during the deployment of Azure IIoT cloud
-                            modules.
+                            modules. If not given, then Azure IIoT modules will
+                            not be deployed. But the required services will be
+                            deployed.
+      --location LOCATION   Location of the Azure datacenter for the deployment.
       --logging-level {DEBUG,INFO,WARNING,ERROR,CRITICAL}
                             Logging level of the program.
       --verbose, -v         The flag for whether there should be logging messages.

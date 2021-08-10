@@ -124,6 +124,10 @@
             "args": [
                 "deploy",
                 "iiot",
+                "--azure-subscription-id",
+                "d74ce0e8-f6a3-4003-9947-c7f593ee842b",
+                "--tenant-id",
+                "7fe7af82-5675-41c7-9bd5-3b099a4f2152",
                 "--resource-group-name",
                 "IoT-project",
                 "--iot-hub-name",
@@ -152,6 +156,9 @@
                 "./configs/aad.json",
                 "--helm-values-yaml-path",
                 "./configs/values.yaml",
+                "--location",
+                "West Europe",
+                "--verbose",
             ],
             "justMyCode": false
         },
