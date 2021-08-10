@@ -9,6 +9,7 @@ from parsers.arg_defaults import (
     DEFAULT_IIOT_APP_NAME,
     DEFAULT_IOT_HUB_NAME,
     DEFAULT_KEY_VAULT_NAME,
+    DEFAULT_LOCATION,
     DEFAULT_RESOURCE_GROUP_NAME,
     DEFAULT_SERVICE_BUS_NAMESPACE,
     DEFAULT_SIGNALR_NAME,
@@ -22,6 +23,23 @@ def get_arg_dictionary() -> Dict[str, Dict[str, Any]]:
     # Do not use positional arguments, to prevent possible collision with subcommand names!
     arg_dict = OrderedDict(
         [
+            (
+                "--azure-subscription-id",
+                {
+                    "type": str,
+                    "required": True,
+                    "help": "Azure subscription ID.",
+                },
+            ),
+            (
+                "--tenant-id",
+                {
+                    "type": str,
+                    "required": True,
+                    "help": "The Azure Active Directory tenant ID that should be used for authenticating "
+                    "requests to the key vault.",
+                },
+            ),
             (
                 "--resource-group-name",
                 {
@@ -115,27 +133,35 @@ def get_arg_dictionary() -> Dict[str, Dict[str, Any]]:
                 "--iiot-repo-path",
                 {
                     "type": str,
-                    "required": True,
                     "help": "Path to the Git repository of Azure IIoT. You can clone it from "
-                    "https://github.com/Azure/Industrial-IoT.",
+                    "https://github.com/Azure/Industrial-IoT. If not given, then Azure IIoT modules will "
+                    "not be deployed. But the required services will be deployed.",
                 },
             ),
             (
                 "--aad-reg-path",
                 {
                     "type": str,
-                    "required": True,
                     "help": "Path to the '.json' file to be created during the registration of Azure IIoT modules in AAD. "
-                    "This file will also be used to deploy the modules into 'kubectl' kubernetes cluster.",
+                    "This file will also be used to deploy the modules into 'kubectl' kubernetes cluster. "
+                    "If not given, then Azure IIoT modules will not be deployed. But the required services will be deployed.",
                 },
             ),
             (
                 "--helm-values-yaml-path",
                 {
                     "type": str,
-                    "required": True,
                     "help": "Path to the 'values.yaml' to be created and to be used by Helm "
-                    "during the deployment of Azure IIoT cloud modules.",
+                    "during the deployment of Azure IIoT cloud modules. "
+                    "If not given, then Azure IIoT modules will not be deployed. But the required services will be deployed.",
+                },
+            ),
+            (
+                "--location",
+                {
+                    "type": str,
+                    "default": DEFAULT_LOCATION,
+                    "help": "Location of the Azure datacenter for the deployment.",
                 },
             ),
         ]

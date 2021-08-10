@@ -1,16 +1,6 @@
 import argparse
-from collections import OrderedDict
 from typing import Any, Dict, List, Optional
 
-from parsers.arg_defaults import (
-    DEFAULT_EVENT_HUB_NAME,
-    DEFAULT_EVENT_HUB_NAMESPACE,
-    DEFAULT_KEY_VAULT_NAME,
-    DEFAULT_LOCATION,
-    DEFAULT_RESOURCE_GROUP_NAME,
-    DEFAULT_SERVICE_BUS_NAMESPACE,
-    DEFAULT_SIGNALR_NAME,
-)
 from parsers.base import BaseParser
 from parsers.subcommands.subcommands.iiot import IiotParser
 from parsers.subparser import SubcommandInfo, SubcommandParser
@@ -60,111 +50,6 @@ def get_arg_dictionary() -> Dict[str, Dict[str, Any]]:
     # Do not use positional arguments, to prevent possible collision with subcommand names!
     arg_dict = vanilla.get_arg_dictionary()
     arg_dict.update(iiot.get_arg_dictionary())
-    deploy_arg_dict = OrderedDict(
-        [
-            (
-                "--azure-subscription-id",
-                {
-                    "type": str,
-                    "required": True,
-                    "help": "Azure subscription ID.",
-                },
-            ),
-            (
-                "--tenant-id",
-                {
-                    "type": str,
-                    "required": True,
-                    "help": "The Azure Active Directory tenant ID that should be used for authenticating "
-                    "requests to the key vault.",
-                },
-            ),
-            (
-                "--resource-group-name",
-                {
-                    "type": str,
-                    "default": DEFAULT_RESOURCE_GROUP_NAME,
-                    "help": "Resource group name for the deployment.",
-                },
-            ),
-            (
-                "--event-hub-namespace",
-                {
-                    "type": str,
-                    "default": DEFAULT_EVENT_HUB_NAMESPACE,
-                    "help": "Name of the EventHub namespace for the deployment.",
-                },
-            ),
-            (
-                "--event-hub-name",
-                {
-                    "type": str,
-                    "default": DEFAULT_EVENT_HUB_NAME,
-                    "help": "Name of the EventHub to provision inside the EventHub namespace.",
-                },
-            ),
-            (
-                "--service-bus-namespace",
-                {
-                    "type": str,
-                    "default": DEFAULT_SERVICE_BUS_NAMESPACE,
-                    "help": "Name of the ServiceBus for the deployment.",
-                },
-            ),
-            (
-                "--key-vault-name",
-                {
-                    "type": str,
-                    "default": DEFAULT_KEY_VAULT_NAME,
-                    "help": "Name of the Key Vault for the deployment.",
-                },
-            ),
-            (
-                "--signalr-name",
-                {
-                    "type": str,
-                    "default": DEFAULT_SIGNALR_NAME,
-                    "help": "Name of the SignalR for the deployment.",
-                },
-            ),
-            (
-                "--iiot-repo-path",
-                {
-                    "type": str,
-                    "help": "Path to the Git repository of Azure IIoT. You can clone it from "
-                    "https://github.com/Azure/Industrial-IoT. If not given, then Azure IIoT modules will "
-                    "not be deployed. But the required services will be deployed.",
-                },
-            ),
-            (
-                "--aad-reg-path",
-                {
-                    "type": str,
-                    "help": "Path to the '.json' file to be created during the registration of Azure IIoT modules in AAD. "
-                    "This file will also be used to deploy the modules into 'kubectl' kubernetes cluster. "
-                    "If not given, then Azure IIoT modules will not be deployed. But the required services will be deployed.",
-                },
-            ),
-            (
-                "--helm-values-yaml-path",
-                {
-                    "type": str,
-                    "help": "Path to the 'values.yaml' to be created and to be used by Helm "
-                    "during the deployment of Azure IIoT cloud modules. "
-                    "If not given, then Azure IIoT modules will not be deployed. But the required services will be deployed.",
-                },
-            ),
-            (
-                "--location",
-                {
-                    "type": str,
-                    "default": DEFAULT_LOCATION,
-                    "help": "Location of the Azure datacenter for the deployment.",
-                },
-            ),
-        ]
-    )
-    arg_dict.update(deploy_arg_dict)
     return arg_dict
 
 
