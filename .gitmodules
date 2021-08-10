@@ -1,0 +1,3 @@
+[submodule "Industrial-IoT"]
+	path = Industrial-IoT
+	url = https://github.com/Azure/Industrial-IoT.git
