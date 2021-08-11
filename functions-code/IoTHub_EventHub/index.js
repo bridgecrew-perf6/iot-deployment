@@ -32,6 +32,10 @@ module.exports = function (context, IoTHubMessages) {
         }
     });
 
+    // The output variable name for a device vendor has the following format:
+    // outputDocument<DeviceVendor>
+    // where the <DeviceVendor> placeholder is the camel case format of the vendor name.
+    // See, https://en.wikipedia.org/wiki/Camel_case
     context.bindings.outputDocumentVemcon = output_vemcon;
     context.bindings.outputDocumentMtsSmart = output_mts_smart;
     context.bindings.outputDocumentExelonix = output_exelonix;
